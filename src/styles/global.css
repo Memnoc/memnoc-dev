@@ -151,19 +151,6 @@ li {
   border-bottom: 1px solid var(--rp-hl-med);
 }
 
-.site-nav .nav-brand {
-  font-weight: 700;
-  color: var(--rp-text);
-  font-size: 0.95rem;
-  letter-spacing: 0.02em;
-  text-decoration: none;
-  margin-right: auto;
-}
-
-.site-nav .nav-brand:hover {
-  text-decoration: none;
-  color: var(--rp-iris);
-}
 
 .site-nav .nav-links {
   display: flex;
