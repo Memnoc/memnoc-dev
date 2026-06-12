@@ -359,6 +359,54 @@ section {
   font-style: italic;
 }
 
+/* ——— Shell preview ——— */
+.shell-preview {
+  background: var(--rp-base);
+  border: 1px solid var(--rp-hl-med);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+}
+
+.shell-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.shell-line {
+  font-family: ui-monospace, 'Cascadia Code', 'SF Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--rp-text);
+}
+
+.sh-prompt {
+  color: var(--rp-pine);
+  user-select: none;
+}
+
+.sh-cmd {
+  color: var(--rp-foam);
+}
+
+.sh-out {
+  color: var(--rp-subtle);
+  padding-left: 1.1rem;
+}
+
+.sh-err {
+  color: var(--rp-love);
+}
+
+.sh-cursor {
+  color: var(--rp-iris);
+  animation: blink 1.1s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
 /* ——— AST viewer component ——— */
 .ast-viewer {
   width: 100%;
