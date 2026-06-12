@@ -24,6 +24,13 @@ const projects = [
     status: 'WIP',
     url: 'https://github.com/Memnoc/BYOL',
   },
+  {
+    name: 'shell',
+    blurb: 'POSIX shell in Rust. Codecrafters challenge, extended beyond the spec — builtins, PATH resolution, REPL loop.',
+    langs: ['Rust'],
+    status: 'WIP',
+    url: 'https://github.com/Memnoc/codecrafters-shell-rust',
+  },
 ] as const;
 
 type StatusKey = typeof projects[number]['status'];
