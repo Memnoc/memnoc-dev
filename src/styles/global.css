@@ -359,6 +359,54 @@ section {
   font-style: italic;
 }
 
+/* ——— Demo carousel ——— */
+.demo-carousel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.demo-tabs {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.demo-tab {
+  font-family: ui-monospace, 'Cascadia Code', 'SF Mono', monospace;
+  font-size: 0.8rem;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  padding: 0.2rem 0.6rem;
+  color: var(--rp-subtle);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.demo-tab:hover {
+  color: var(--rp-text);
+  border-color: var(--rp-hl-high);
+}
+
+.demo-tab.active {
+  color: var(--rp-iris);
+  border-color: var(--rp-iris);
+}
+
+.demo-source-link {
+  font-family: ui-monospace, 'Cascadia Code', 'SF Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--rp-muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.demo-source-link:hover {
+  color: var(--rp-foam);
+  text-decoration: none;
+}
+
 /* ——— Shell preview ——— */
 .shell-preview {
   background: var(--rp-base);

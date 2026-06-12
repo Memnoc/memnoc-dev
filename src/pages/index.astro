@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import DemoCarousel from '../components/DemoCarousel.tsx';
 
 const projects = [
   {
@@ -76,22 +77,7 @@ const statusClass: Record<StatusKey, string> = {
   </section>
 
   <section class="demo-section">
-    <p class="section-caption">
-      shell — POSIX shell in Rust. Builtins, PATH resolution, REPL loop. Interactive demo lands when piping does.
-    </p>
-    <div class="shell-preview">
-      <div class="shell-lines">
-        <div class="shell-line"><span class="sh-prompt">$ </span><span class="sh-cmd">echo hello world</span></div>
-        <div class="shell-line sh-out">hello world</div>
-        <div class="shell-line"><span class="sh-prompt">$ </span><span class="sh-cmd">type echo</span></div>
-        <div class="shell-line sh-out">echo is a shell builtin</div>
-        <div class="shell-line"><span class="sh-prompt">$ </span><span class="sh-cmd">type git</span></div>
-        <div class="shell-line sh-out">git is /usr/bin/git</div>
-        <div class="shell-line"><span class="sh-prompt">$ </span><span class="sh-cmd">foobar</span></div>
-        <div class="shell-line sh-out sh-err">foobar: command not found</div>
-        <div class="shell-line"><span class="sh-prompt">$ </span><span class="sh-cursor" aria-hidden="true">█</span></div>
-      </div>
-    </div>
+    <DemoCarousel client:only="react" />
   </section>
 
   <section class="built">
