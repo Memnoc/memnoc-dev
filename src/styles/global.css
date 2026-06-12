@@ -144,7 +144,7 @@ li {
 /* ——— Site nav ——— */
 .site-nav {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 1.5rem;
   padding: 1.25rem 0;
   margin-bottom: 2.5rem;
@@ -195,19 +195,21 @@ li {
 /* ——— Theme toggle ——— */
 #theme-toggle {
   background: none;
-  border: none;
+  border: 1px solid var(--rp-hl-med);
+  border-radius: 4px;
   cursor: pointer;
-  padding: 0.25rem;
-  color: var(--rp-muted);
-  font-size: 1rem;
-  line-height: 1;
+  padding: 0.3rem;
+  color: var(--rp-subtle);
+  line-height: 0;
   display: flex;
   align-items: center;
-  transition: color 0.1s;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
 
 #theme-toggle:hover {
   color: var(--rp-text);
+  border-color: var(--rp-hl-high);
+  background: var(--rp-overlay);
 }
 
 /* Default dawn: sun visible, moon hidden */
