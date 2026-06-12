@@ -491,14 +491,14 @@ section {
   border-color: var(--rp-foam);
 }
 
-.ast-examples {
+.example-chips {
   display: flex;
   gap: 0.4rem;
   flex-wrap: wrap;
   margin-bottom: 1rem;
 }
 
-.ast-example-chip {
+.example-chip {
   font-family: 'JetBrains Mono', 'Berkeley Mono', ui-monospace, monospace;
   font-size: 0.75rem;
   background: var(--rp-overlay);
@@ -510,12 +510,12 @@ section {
   transition: color 0.1s, border-color 0.1s;
 }
 
-.ast-example-chip:hover {
+.example-chip:hover {
   color: var(--rp-text);
   border-color: var(--rp-hl-high);
 }
 
-.ast-example-chip.active {
+.example-chip.active {
   color: var(--rp-foam);
   border-color: var(--rp-foam);
 }

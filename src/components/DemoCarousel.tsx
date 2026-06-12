@@ -6,7 +6,7 @@ const DEMOS = [
   {
     name: 'shell',
     url: 'https://github.com/Memnoc/codecrafters-shell-rust',
-    caption: 'POSIX shell in Rust. Builtins, PATH resolution, REPL loop. Interactive demo lands when piping does.',
+    caption: 'POSIX shell in Rust. Builtins, PATH resolution, REPL loop. This demo mirrors the Rust implementation; piping lands next.',
     Component: ShellPreview,
   },
   {

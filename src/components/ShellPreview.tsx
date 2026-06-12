@@ -113,11 +113,11 @@ export default function ShellPreview() {
 
   return (
     <>
-    <div className="ast-examples">
+    <div className="example-chips">
       {EXAMPLES.map(ex => (
         <button
           key={ex}
-          className="ast-example-chip"
+          className="example-chip"
           onClick={() => runExample(ex)}
           type="button"
         >{ex}</button>

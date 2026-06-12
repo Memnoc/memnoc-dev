@@ -295,11 +295,11 @@ export default function AstViewer() {
         autoComplete="off"
         autoCorrect="off"
       />
-      <div className="ast-examples">
+      <div className="example-chips">
         {EXAMPLES.map(ex => (
           <button
             key={ex}
-            className={`ast-example-chip${input === ex ? ' active' : ''}`}
+            className={`example-chip${input === ex ? ' active' : ''}`}
             onClick={() => handleExample(ex)}
             type="button"
           >
