@@ -453,6 +453,7 @@ section {
 .shell-input-line {
   display: flex;
   align-items: center;
+  gap: 0.25rem;
 }
 
 .shell-input {
