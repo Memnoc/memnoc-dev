@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import type { KeyboardEvent } from 'react';
 
-const BUILTINS = ['echo', 'type', 'clear', 'exit', 'help'];
+const BUILTINS = ['echo', 'type', 'clear', 'clean', 'exit', 'help'];
 
 const EXAMPLES = [
   'echo hello world',
@@ -10,6 +10,7 @@ const EXAMPLES = [
   'type git',
   'type foobar',
   'help',
+  'clean',
 ];
 
 const FAKE_PATH: Record<string, string> = {
@@ -53,11 +54,13 @@ function run(raw: string): { entries: Entry[]; clear?: boolean } {
       return { entries: [cmd, { kind: 'err', text: `${args}: not found` }] };
     }
     case 'clear':
+    case 'clean':
       return { entries: [], clear: true };
     case 'exit':
       return { entries: [cmd, { kind: 'out', text: 'logout' }] };
     case 'help':
       return { entries: [cmd, { kind: 'out', text: `builtins: ${BUILTINS.join('  ')}` }] };
+
     default:
       return { entries: [cmd, { kind: 'err', text: `${verb}: command not found` }] };
   }
