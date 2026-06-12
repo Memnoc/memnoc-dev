@@ -345,14 +345,14 @@ section {
 }
 
 /* ——— AST viewer section ——— */
-.ast-section {
+.demo-section {
   border: 1px solid var(--rp-hl-med);
   border-radius: 6px;
   padding: 1.25rem;
   background: var(--rp-surface);
 }
 
-.ast-section .section-caption {
+.demo-section .section-caption {
   font-size: 0.8rem;
   color: var(--rp-muted);
   margin-bottom: 0.75rem;
