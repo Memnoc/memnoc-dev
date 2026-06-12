@@ -3,6 +3,15 @@ import type { KeyboardEvent } from 'react';
 
 const BUILTINS = ['echo', 'type', 'clear', 'exit', 'help'];
 
+const EXAMPLES = [
+  'echo hello world',
+  'type echo',
+  'type cargo',
+  'type git',
+  'type foobar',
+  'help',
+];
+
 const FAKE_PATH: Record<string, string> = {
   git:   '/usr/bin/git',
   ls:    '/bin/ls',
@@ -91,7 +100,27 @@ export default function ShellPreview() {
     }
   }
 
+  function runExample(cmd: string) {
+    const { entries, clear } = run(cmd);
+    setHistory(h => clear ? [] : [...h, ...entries]);
+    setCmdHist(h => [cmd, ...h]);
+    setHistIdx(-1);
+    setInput('');
+    inputRef.current?.focus();
+  }
+
   return (
+    <>
+    <div className="ast-examples">
+      {EXAMPLES.map(ex => (
+        <button
+          key={ex}
+          className="ast-example-chip"
+          onClick={() => runExample(ex)}
+          type="button"
+        >{ex}</button>
+      ))}
+    </div>
     <div className="shell-preview" ref={containerRef} onClick={() => inputRef.current?.focus()}>
       <div className="shell-lines">
         {history.map((entry, i) =>
@@ -122,5 +151,6 @@ export default function ShellPreview() {
         </div>
       </div>
     </div>
+    </>
   );
 }
