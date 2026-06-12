@@ -43,7 +43,15 @@ const gitHash = __GIT_HASH__;
   </head>
   <body>
     <nav class="site-nav">
-      <span id="utc-clock" class="nav-clock" aria-label="Current UTC time"></span>
+      <div class="nav-status">
+        <span id="utc-clock" class="nav-clock" aria-label="Current UTC time"></span>
+        <a
+          href={`https://github.com/Memnoc/matteostara-com/commit/${gitHash}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="build-hash"
+        >build: {gitHash}</a>
+      </div>
       <div class="nav-links">
         <a href="/" class:list={[{ active: currentPath === '/' }]}>home</a>
         <a href="/about" class:list={[{ active: currentPath === '/about' }]}>about</a>
@@ -57,14 +65,7 @@ const gitHash = __GIT_HASH__;
     <main>
       <slot />
     </main>
-    <footer class="site-footer">
-      <a
-        href={`https://github.com/Memnoc/matteostara-com/commit/${gitHash}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="build-hash"
-      >build: {gitHash}</a>
-    </footer>
+
     <script>
       const btn = document.getElementById('theme-toggle');
 
