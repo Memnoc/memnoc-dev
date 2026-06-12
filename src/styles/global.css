@@ -151,6 +151,13 @@ li {
   border-bottom: 1px solid var(--rp-hl-med);
 }
 
+.nav-clock {
+  font-family: ui-monospace, 'Cascadia Code', 'SF Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--rp-subtle);
+  letter-spacing: 0.02em;
+  margin-right: auto;
+}
 
 .site-nav .nav-links {
   display: flex;
@@ -694,6 +701,25 @@ a.post-tag:hover {
 
 .about-content p {
   color: var(--rp-text);
+}
+
+/* ——— Footer ——— */
+.site-footer {
+  margin-top: 4rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--rp-hl-med);
+}
+
+.build-hash {
+  font-family: ui-monospace, 'Cascadia Code', 'SF Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--rp-muted);
+  text-decoration: none;
+}
+
+.build-hash:hover {
+  color: var(--rp-subtle);
+  text-decoration: none;
 }
 
 /* ——— Utilities ——— */

@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 
+declare const __GIT_HASH__: string;
+
 interface Props {
   title?: string;
   description?: string;
@@ -12,6 +14,8 @@ const {
   description = 'Systems software engineer. C and Rust. Compilers.',
   currentPath = Astro.url.pathname,
 } = Astro.props;
+
+const gitHash = __GIT_HASH__;
 ---
 
 <!doctype html>
@@ -39,6 +43,7 @@ const {
   </head>
   <body>
     <nav class="site-nav">
+      <span id="utc-clock" class="nav-clock" aria-label="Current UTC time"></span>
       <div class="nav-links">
         <a href="/" class:list={[{ active: currentPath === '/' }]}>home</a>
         <a href="/about" class:list={[{ active: currentPath === '/about' }]}>about</a>
@@ -52,6 +57,14 @@ const {
     <main>
       <slot />
     </main>
+    <footer class="site-footer">
+      <a
+        href={`https://github.com/Memnoc/matteostara-com/commit/${gitHash}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="build-hash"
+      >build: {gitHash}</a>
+    </footer>
     <script>
       const btn = document.getElementById('theme-toggle');
 
@@ -61,6 +74,13 @@ const {
         document.documentElement.setAttribute('data-theme', next);
         localStorage.setItem('rp-theme', next);
       });
+
+      const clock = document.getElementById('utc-clock');
+      function tick() {
+        if (clock) clock.textContent = new Date().toISOString().replace(/\.\d{3}Z$/, 'Z');
+      }
+      tick();
+      setInterval(tick, 1000);
     </script>
   </body>
 </html>
