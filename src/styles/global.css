@@ -1,0 +1,533 @@
+/* Rosé Pine Dawn — light */
+:root,
+[data-theme="dawn"] {
+  --rp-base: #faf4ed;
+  --rp-surface: #fffaf3;
+  --rp-overlay: #f2e9e1;
+  --rp-muted: #9893a5;
+  --rp-subtle: #797593;
+  --rp-text: #575279;
+  --rp-love: #b4637a;
+  --rp-gold: #ea9d34;
+  --rp-rose: #d7827a;
+  --rp-pine: #286983;
+  --rp-foam: #56949f;
+  --rp-iris: #907aa9;
+  --rp-hl-low: #f4ede8;
+  --rp-hl-med: #dfdad9;
+  --rp-hl-high: #cecacd;
+}
+
+/* Rosé Pine Moon — dark (OS default) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --rp-base: #232136;
+    --rp-surface: #2a273f;
+    --rp-overlay: #393552;
+    --rp-muted: #6e6a86;
+    --rp-subtle: #908caa;
+    --rp-text: #e0def4;
+    --rp-love: #eb6f92;
+    --rp-gold: #f6c177;
+    --rp-rose: #ea9a97;
+    --rp-pine: #3e8fb0;
+    --rp-foam: #9ccfd8;
+    --rp-iris: #c4a7e7;
+    --rp-hl-low: #2a283e;
+    --rp-hl-med: #44415a;
+    --rp-hl-high: #56526e;
+  }
+}
+
+[data-theme="moon"] {
+  --rp-base: #232136;
+  --rp-surface: #2a273f;
+  --rp-overlay: #393552;
+  --rp-muted: #6e6a86;
+  --rp-subtle: #908caa;
+  --rp-text: #e0def4;
+  --rp-love: #eb6f92;
+  --rp-gold: #f6c177;
+  --rp-rose: #ea9a97;
+  --rp-pine: #3e8fb0;
+  --rp-foam: #9ccfd8;
+  --rp-iris: #c4a7e7;
+  --rp-hl-low: #2a283e;
+  --rp-hl-med: #44415a;
+  --rp-hl-high: #56526e;
+}
+
+/* ——— Reset ——— */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ——— Base ——— */
+html {
+  background-color: var(--rp-base);
+  color: var(--rp-text);
+  font-family: -apple-system, ui-sans-serif, system-ui, 'Segoe UI', sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+body {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+a {
+  color: var(--rp-foam);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+h2 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--rp-muted);
+  margin-bottom: 1rem;
+}
+
+p {
+  margin-bottom: 0.9rem;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+code {
+  font-family: 'JetBrains Mono', 'Berkeley Mono', 'Cascadia Code', ui-monospace, monospace;
+  font-size: 0.875em;
+  background: var(--rp-surface);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+
+pre {
+  font-family: 'JetBrains Mono', 'Berkeley Mono', 'Cascadia Code', ui-monospace, monospace;
+  font-size: 0.875em;
+  background: var(--rp-surface);
+  padding: 1rem 1.25rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+ul, ol {
+  padding-left: 1.25rem;
+}
+
+li {
+  margin-bottom: 0.3rem;
+}
+
+/* ——— Site nav ——— */
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.25rem 0;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--rp-hl-med);
+}
+
+.site-nav .nav-brand {
+  font-weight: 700;
+  color: var(--rp-text);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  margin-right: auto;
+}
+
+.site-nav .nav-brand:hover {
+  text-decoration: none;
+  color: var(--rp-iris);
+}
+
+.site-nav .nav-links {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.site-nav .nav-links a {
+  color: var(--rp-subtle);
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.site-nav .nav-links a:hover {
+  color: var(--rp-text);
+  text-decoration: none;
+}
+
+.site-nav .nav-links a.active {
+  color: var(--rp-text);
+}
+
+/* ——— Theme toggle ——— */
+#theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  color: var(--rp-muted);
+  font-size: 1rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  transition: color 0.1s;
+}
+
+#theme-toggle:hover {
+  color: var(--rp-text);
+}
+
+/* Default dawn: sun visible, moon hidden */
+#theme-toggle .icon-moon { display: none; }
+#theme-toggle .icon-dawn { display: inline; }
+
+/* Moon theme: swap icons */
+[data-theme="moon"] #theme-toggle .icon-dawn { display: none; }
+[data-theme="moon"] #theme-toggle .icon-moon { display: inline; }
+
+/* Fallback for system dark before JS runs */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="dawn"]) #theme-toggle .icon-dawn { display: none; }
+  :root:not([data-theme="dawn"]) #theme-toggle .icon-moon { display: inline; }
+}
+
+/* ——— Profile header ——— */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.profile-img {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--rp-overlay);
+}
+
+.profile-img-placeholder {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--rp-overlay);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--rp-subtle);
+  letter-spacing: 0.02em;
+}
+
+.profile-info .name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--rp-text);
+  margin-bottom: 0.3rem;
+}
+
+.profile-info .handle {
+  color: var(--rp-subtle);
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.social-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.social-row a {
+  font-size: 0.85rem;
+  color: var(--rp-subtle);
+}
+
+.social-row a:hover {
+  color: var(--rp-foam);
+  text-decoration: none;
+}
+
+/* ——— Hero ——— */
+.hero {
+  margin-bottom: 3rem;
+}
+
+.hero .oneliner {
+  font-size: 1.05rem;
+  color: var(--rp-text);
+  margin-bottom: 0.4rem;
+}
+
+.hero .current {
+  font-size: 0.95rem;
+  color: var(--rp-subtle);
+}
+
+/* ——— Sections ——— */
+section {
+  margin-bottom: 3rem;
+}
+
+/* ——— AST viewer section ——— */
+.ast-section {
+  border: 1px solid var(--rp-hl-med);
+  border-radius: 6px;
+  padding: 1.25rem;
+  background: var(--rp-surface);
+}
+
+.ast-section .section-caption {
+  font-size: 0.8rem;
+  color: var(--rp-muted);
+  margin-bottom: 0.75rem;
+  font-style: italic;
+}
+
+/* ——— AST viewer component ——— */
+.ast-viewer {
+  width: 100%;
+}
+
+.ast-viewer input {
+  width: 100%;
+  background: var(--rp-base);
+  border: 1px solid var(--rp-hl-high);
+  border-radius: 4px;
+  padding: 0.45rem 0.75rem;
+  font-family: 'JetBrains Mono', 'Berkeley Mono', ui-monospace, monospace;
+  font-size: 0.875rem;
+  color: var(--rp-text);
+  outline: none;
+  margin-bottom: 1rem;
+  transition: border-color 0.1s;
+}
+
+.ast-viewer input:focus {
+  border-color: var(--rp-foam);
+}
+
+.ast-viewer .ast-error {
+  font-size: 0.8rem;
+  color: var(--rp-love);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  margin: 0;
+}
+
+.ast-viewer .ast-svg-wrap {
+  overflow-x: auto;
+}
+
+.ast-viewer svg {
+  display: block;
+}
+
+/* AST SVG node styles — referenced by the React component via className */
+.ast-node circle {
+  fill: var(--rp-surface);
+  stroke: var(--rp-hl-high);
+  stroke-width: 1.5;
+}
+
+.ast-node-binary circle {
+  stroke: var(--rp-foam);
+}
+
+.ast-node-unary circle {
+  stroke: var(--rp-iris);
+}
+
+.ast-node-literal circle {
+  stroke: var(--rp-pine);
+}
+
+.ast-node-variable circle {
+  stroke: var(--rp-gold);
+}
+
+.ast-node-grouping circle {
+  stroke: var(--rp-muted);
+}
+
+.ast-node text {
+  fill: var(--rp-text);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  user-select: none;
+}
+
+.ast-edge {
+  stroke: var(--rp-hl-high);
+  stroke-width: 1.5;
+}
+
+/* ——— Built / Studying sections ——— */
+.project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.project-card {
+  border-bottom: 1px solid var(--rp-hl-med);
+  padding-bottom: 1.25rem;
+}
+
+.project-card:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.project-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.3rem;
+}
+
+.project-header a {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--rp-text);
+}
+
+.project-header a:hover {
+  color: var(--rp-foam);
+  text-decoration: none;
+}
+
+.project-card .blurb {
+  font-size: 0.9rem;
+  color: var(--rp-subtle);
+  margin-bottom: 0.5rem;
+}
+
+.lang-tags {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: 0.75rem;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  background: var(--rp-overlay);
+  color: var(--rp-subtle);
+  padding: 0.1rem 0.45rem;
+  border-radius: 3px;
+}
+
+.status {
+  font-size: 0.7rem;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  padding: 0.1rem 0.5rem;
+  border-radius: 3px;
+  text-transform: lowercase;
+}
+
+.status-original {
+  background: color-mix(in srgb, var(--rp-foam) 12%, transparent);
+  color: var(--rp-foam);
+}
+
+.status-personalized-from-ci {
+  background: color-mix(in srgb, var(--rp-iris) 12%, transparent);
+  color: var(--rp-iris);
+}
+
+.status-wip {
+  background: color-mix(in srgb, var(--rp-gold) 12%, transparent);
+  color: var(--rp-gold);
+}
+
+.studying-text {
+  font-size: 0.95rem;
+  color: var(--rp-text);
+}
+
+.studying-text em {
+  color: var(--rp-subtle);
+  font-style: normal;
+}
+
+/* ——— Contact ——— */
+.contact ul {
+  list-style: none;
+  padding: 0;
+}
+
+.contact li {
+  margin-bottom: 0.4rem;
+}
+
+.contact a {
+  font-size: 0.95rem;
+  color: var(--rp-subtle);
+}
+
+.contact a:hover {
+  color: var(--rp-foam);
+  text-decoration: none;
+}
+
+/* ——— About page ——— */
+.about-content {
+  font-size: 0.975rem;
+}
+
+.about-content h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.about-content h2:first-child {
+  margin-top: 0;
+}
+
+.about-content p {
+  color: var(--rp-text);
+}
+
+/* ——— Utilities ——— */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

@@ -1,0 +1,102 @@
+---
+import Base from '../layouts/Base.astro';
+import AstViewer from '../components/AstViewer.tsx';
+
+const projects = [
+  {
+    name: 'r_command_line',
+    blurb: 'CLI tool that generates commit messages. Finished; needs a revisit.',
+    langs: ['Rust'],
+    status: 'Original',
+    url: 'https://github.com/Memnoc/r_command_line',
+  },
+  {
+    name: 'StarScript',
+    blurb: 'Lox-flavored interpreter in C. Following Crafting Interpreters but extended — named grammar rules, custom error handling, going past the book.',
+    langs: ['C'],
+    status: 'Personalized from CI',
+    url: 'https://github.com/Memnoc/StarScript',
+  },
+  {
+    name: 'BYOL',
+    blurb: 'Build Your Own Lisp — personalizing the tutorial, adding extensions as I understand each concept.',
+    langs: ['C'],
+    status: 'WIP',
+    url: 'https://github.com/Memnoc/BYOL',
+  },
+] as const;
+
+type StatusKey = typeof projects[number]['status'];
+
+const statusClass: Record<StatusKey, string> = {
+  'Original':            'status-original',
+  'Personalized from CI': 'status-personalized-from-ci',
+  'WIP':                 'status-wip',
+};
+---
+
+<Base title="Matteo Stara (memnoc)">
+  <section class="profile-header">
+    <div class="profile-img-placeholder" aria-hidden="true">ms</div>
+    <div class="profile-info">
+      <h1 class="name">Matteo Stara <span class="handle">(memnoc)</span></h1>
+      <div class="social-row">
+        <a href="https://github.com/Memnoc" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://linkedin.com/in/matteostara" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://www.artstation.com/starart" target="_blank" rel="noopener noreferrer">ArtStation</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero">
+    <p class="oneliner">I write systems software in C and Rust. Compilers, mostly.</p>
+    <p class="current">Currently: an interpreter and notes from Crafting Interpreters.</p>
+  </section>
+
+  <section class="ast-section">
+    <p class="section-caption">
+      StarScript — a Lox-flavored interpreter in C. Type an expression, see the parse tree.
+    </p>
+    <AstViewer client:load />
+  </section>
+
+  <section class="built">
+    <h2>Built</h2>
+    <div class="project-list">
+      {projects.map(p => (
+        <div class="project-card">
+          <div class="project-header">
+            <a href={p.url} target="_blank" rel="noopener noreferrer">{p.name}</a>
+            <span class={`status ${statusClass[p.status]}`}>{p.status.toLowerCase()}</span>
+          </div>
+          <p class="blurb">{p.blurb}</p>
+          <div class="lang-tags">
+            {p.langs.map(l => <span class="tag">{l}</span>)}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="studying">
+    <h2>Studying</h2>
+    <p class="studying-text">
+      Crafting Interpreters — working through closures and the resolver pass.
+      Variable resolution across scope boundaries took longer than expected;
+      the way the resolver and interpreter share state is subtle.
+    </p>
+    <p class="studying-text">
+      Also rereading <em>Build Your Own Lisp</em> with fresh eyes after the StarScript work.
+    </p>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>Contact</h2>
+    <ul>
+      <li><a href="mailto:memnochmod@gmail.com">memnochmod@gmail.com</a></li>
+      <li><a href="https://github.com/Memnoc" target="_blank" rel="noopener noreferrer">github.com/Memnoc</a></li>
+      <li><a href="https://linkedin.com/in/matteostara" target="_blank" rel="noopener noreferrer">linkedin.com/in/matteostara</a></li>
+      <li><a href="https://www.artstation.com/starart" target="_blank" rel="noopener noreferrer">artstation.com/starart</a></li>
+    </ul>
+  </section>
+</Base>
