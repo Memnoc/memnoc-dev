@@ -43,6 +43,7 @@ const {
       <div class="nav-links">
         <a href="/" class:list={[{ active: currentPath === '/' }]}>home</a>
         <a href="/about" class:list={[{ active: currentPath === '/about' }]}>about</a>
+        <a href="/writing" class:list={[{ active: currentPath.startsWith('/writing') }]}>writing</a>
         <a href="/#contact">contact</a>
       </div>
       <button id="theme-toggle" aria-label="Toggle theme">

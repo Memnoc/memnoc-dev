@@ -241,6 +241,14 @@ function parseInput(src: string): ParseResult {
 
 const DEFAULT_INPUT = '1 + 2 * 3';
 
+const EXAMPLES = [
+  '1 + 2 * 3',
+  '(a + b) * c',
+  '-x == nil',
+  'true != false',
+  'x > 0',
+];
+
 export default function AstViewer() {
   const [input, setInput] = useState(DEFAULT_INPUT);
   const [result, setResult] = useState<ParseResult>(() => parseInput(DEFAULT_INPUT));
@@ -249,6 +257,11 @@ export default function AstViewer() {
     const val = e.target.value;
     setInput(val);
     setResult(parseInput(val));
+  }, []);
+
+  const handleExample = useCallback((ex: string) => {
+    setInput(ex);
+    setResult(parseInput(ex));
   }, []);
 
   const layouts = result.ok ? result.layouts : [];
@@ -282,6 +295,18 @@ export default function AstViewer() {
         autoComplete="off"
         autoCorrect="off"
       />
+      <div className="ast-examples">
+        {EXAMPLES.map(ex => (
+          <button
+            key={ex}
+            className={`ast-example-chip${input === ex ? ' active' : ''}`}
+            onClick={() => handleExample(ex)}
+            type="button"
+          >
+            {ex}
+          </button>
+        ))}
+      </div>
       {error && <p className="ast-error">{error}</p>}
       {!error && layouts.length > 0 && (
         <div className="ast-svg-wrap">

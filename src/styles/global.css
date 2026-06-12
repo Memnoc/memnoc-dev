@@ -253,7 +253,7 @@ li {
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--rp-text);
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.2rem;
 }
 
 .profile-info .handle {
@@ -262,19 +262,54 @@ li {
   font-size: 1rem;
 }
 
-.social-row {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-top: 0.5rem;
+.profile-info .title {
+  font-size: 0.82rem;
+  color: var(--rp-muted);
+  margin-bottom: 0.55rem;
+  letter-spacing: 0.01em;
 }
 
-.social-row a {
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.contact-row a {
   font-size: 0.85rem;
   color: var(--rp-subtle);
+  text-decoration: none;
 }
 
-.social-row a:hover {
+.contact-row a:hover {
+  color: var(--rp-foam);
+}
+
+.contact-row .contact-email {
+  color: var(--rp-text);
+  font-weight: 500;
+}
+
+.contact-row .contact-email:hover {
+  color: var(--rp-foam);
+}
+
+.social-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.social-link {
+  color: var(--rp-subtle);
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: color 0.1s;
+}
+
+.social-link:hover {
   color: var(--rp-foam);
   text-decoration: none;
 }
@@ -338,6 +373,35 @@ section {
   border-color: var(--rp-foam);
 }
 
+.ast-examples {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.ast-example-chip {
+  font-family: 'JetBrains Mono', 'Berkeley Mono', ui-monospace, monospace;
+  font-size: 0.75rem;
+  background: var(--rp-overlay);
+  color: var(--rp-subtle);
+  border: 1px solid transparent;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: color 0.1s, border-color 0.1s;
+}
+
+.ast-example-chip:hover {
+  color: var(--rp-text);
+  border-color: var(--rp-hl-high);
+}
+
+.ast-example-chip.active {
+  color: var(--rp-foam);
+  border-color: var(--rp-foam);
+}
+
 .ast-viewer .ast-error {
   font-size: 0.8rem;
   color: var(--rp-love);
@@ -355,8 +419,8 @@ section {
 
 /* AST SVG node styles — referenced by the React component via className */
 .ast-node circle {
-  fill: var(--rp-surface);
-  stroke: var(--rp-hl-high);
+  fill: var(--rp-overlay);
+  stroke: var(--rp-subtle);
   stroke-width: 1.5;
 }
 
@@ -481,24 +545,150 @@ section {
   font-style: normal;
 }
 
-/* ——— Contact ——— */
-.contact ul {
-  list-style: none;
-  padding: 0;
+/* ——— Writing list ——— */
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.contact li {
-  margin-bottom: 0.4rem;
+.post-item {
+  border-bottom: 1px solid var(--rp-hl-med);
+  padding-bottom: 1.5rem;
 }
 
-.contact a {
+.post-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.post-item-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.post-item-header a {
+  font-weight: 600;
   font-size: 0.95rem;
+  color: var(--rp-text);
+  text-decoration: none;
+}
+
+.post-item-header a:hover {
+  color: var(--rp-foam);
+}
+
+.post-date {
+  font-size: 0.8rem;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  color: var(--rp-muted);
+  white-space: nowrap;
+}
+
+.post-description {
+  font-size: 0.9rem;
+  color: var(--rp-subtle);
+  margin-bottom: 0;
+}
+
+/* ——— Post tags ——— */
+.post-tags {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+a.post-tag {
+  text-decoration: none;
+  color: var(--rp-muted);
+  transition: color 0.1s;
+}
+
+a.post-tag:hover {
+  color: var(--rp-iris);
+  text-decoration: none;
+}
+
+.tag-header {
+  margin-bottom: 1.75rem;
+}
+
+.tag-back {
+  font-size: 0.8rem;
+  color: var(--rp-subtle);
+  text-decoration: none;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.tag-back:hover {
+  color: var(--rp-foam);
+  text-decoration: none;
+}
+
+/* ——— Post page ——— */
+.post-header {
+  margin-bottom: 2.5rem;
+}
+
+.post-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--rp-text);
+  margin-bottom: 0.4rem;
+  line-height: 1.3;
+}
+
+.post-meta {
+  font-size: 0.8rem;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  color: var(--rp-muted);
+  margin-bottom: 0;
+}
+
+.post-body {
+  font-size: 0.975rem;
+  line-height: 1.75;
+}
+
+.post-body h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--rp-text);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.post-body h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--rp-text);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.post-body blockquote {
+  border-left: 3px solid var(--rp-hl-high);
+  padding-left: 1rem;
+  margin: 1.25rem 0;
   color: var(--rp-subtle);
 }
 
-.contact a:hover {
+.post-body hr {
+  border: none;
+  border-top: 1px solid var(--rp-hl-med);
+  margin: 2rem 0;
+}
+
+.post-body a {
   color: var(--rp-foam);
-  text-decoration: none;
 }
 
 /* ——— About page ——— */

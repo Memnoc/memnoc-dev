@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+function slug(id: string) { return id.replace(/\.md$/, ''); }
+
+function formatDate(d: Date) {
+  return d.toLocaleDateString('en-IE', { year: 'numeric', month: 'short', day: 'numeric' });
+}
+---
+
+<Base title="Writing — Matteo Stara (memnoc)" description="Notes on compilers, systems software, and language implementation.">
+  <h2>Writing</h2>
+  <div class="post-list">
+    {posts.map(post => (
+      <div class="post-item">
+        <div class="post-item-header">
+          <a href={`/writing/${slug(post.id)}`}>{post.data.title}</a>
+          <span class="post-date">{formatDate(post.data.date)}</span>
+        </div>
+        <p class="post-description">{post.data.description}</p>
+        {post.data.tags.length > 0 && (
+          <div class="post-tags">
+            {post.data.tags.map(t => (
+              <a href={`/writing/tag/${t}`} class="tag post-tag">#{t}</a>
+            ))}
+          </div>
+        )}
+      </div>
+    ))}
+  </div>
+</Base>
