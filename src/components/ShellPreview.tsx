@@ -59,11 +59,12 @@ export default function ShellPreview() {
   const [input, setInput]     = useState('');
   const [cmdHist, setCmdHist] = useState<string[]>([]);
   const [histIdx, setHistIdx] = useState(-1);
-  const bottomRef = useRef<HTMLDivElement>(null);
-  const inputRef  = useRef<HTMLInputElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef     = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    const el = containerRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
   }, [history]);
 
   function submit() {
@@ -91,7 +92,7 @@ export default function ShellPreview() {
   }
 
   return (
-    <div className="shell-preview" onClick={() => inputRef.current?.focus()}>
+    <div className="shell-preview" ref={containerRef} onClick={() => inputRef.current?.focus()}>
       <div className="shell-lines">
         {history.map((entry, i) =>
           entry.kind === 'cmd' ? (
@@ -119,7 +120,6 @@ export default function ShellPreview() {
             aria-label="shell input"
           />
         </div>
-        <div ref={bottomRef} />
       </div>
     </div>
   );
