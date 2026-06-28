@@ -740,6 +740,30 @@ section {
   flex-wrap: wrap;
 }
 
+.post-body-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.post-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.post-thumb-link {
+  flex-shrink: 0;
+}
+
+.post-thumb {
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  background: var(--rp-overlay);
+  display: block;
+}
+
 .post-title-link {
   display: block;
   font-weight: 600;
