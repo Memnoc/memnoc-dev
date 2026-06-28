@@ -751,8 +751,27 @@ section {
   min-width: 0;
 }
 
+.post-thumb-wrap {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
 .post-thumb-link {
   flex-shrink: 0;
+}
+
+.post-thumb-credit {
+  font-size: 0.65rem;
+  color: var(--rp-subtle);
+  text-decoration: none;
+  opacity: 0.6;
+}
+
+.post-thumb-credit:hover {
+  opacity: 1;
 }
 
 .post-thumb {

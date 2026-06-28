@@ -20,6 +20,17 @@ function firstImage(body: string): string | null {
   const m = body.match(/!\[.*?\]\((.+?)\)/);
   return m ? m[1] : null;
 }
+
+function fallbackImage(tags: string[], title: string): string {
+  const keywords = tags.length > 0 ? tags.join(',') : title.split(' ').slice(0, 3).join(',');
+  return `https://source.unsplash.com/400x300/?${encodeURIComponent(keywords)}`;
+}
+
+function thumbFor(post: { data: { image?: string; tags: string[]; title: string }; body?: string }): { url: string; credit: boolean } {
+  const manual = post.data.image ?? firstImage(post.body ?? '');
+  if (manual) return { url: manual, credit: false };
+  return { url: fallbackImage(post.data.tags, post.data.title), credit: true };
+}
 ---
 
 <Base title="Writing — Matteo Stara (memnoc)" description="Notes on compilers, systems software, and language implementation.">
@@ -47,11 +58,14 @@ function firstImage(body: string): string | null {
             <a href={`/writing/${slug(post.id)}`} class="post-title-link">{post.data.title}</a>
             <p class="post-description">{post.data.description}</p>
           </div>
-          {(post.data.image ?? firstImage(post.body ?? '')) && (
-            <a href={`/writing/${slug(post.id)}`} class="post-thumb-link">
-              <img src={post.data.image ?? firstImage(post.body ?? '')!} alt="" class="post-thumb" loading="lazy" />
-            </a>
-          )}
+          {(() => { const t = thumbFor(post); return (
+            <div class="post-thumb-wrap">
+              <a href={`/writing/${slug(post.id)}`} class="post-thumb-link">
+                <img src={t.url} alt="" class="post-thumb" loading="lazy" />
+              </a>
+              {t.credit && <a href="https://unsplash.com" target="_blank" rel="noopener" class="post-thumb-credit">Photo: Unsplash</a>}
+            </div>
+          ); })()}
         </div>
       </div>
     ))}
