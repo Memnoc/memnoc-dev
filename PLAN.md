@@ -50,9 +50,9 @@ Build private. **No public link anywhere** (CV / LinkedIn / applications / socia
 
 ## Domain + hosting
 
-- Domain: **matteostara.com** (already owned on Hostinger)
+- Domain: **memnoc.dev** (registered on Cloudflare Registrar, ~$12/yr)
 - Hosting: **Cloudflare Pages** (free, edge CDN, git-push deploy)
-- DNS: Hostinger nameservers → Cloudflare (set at impl phase)
+- DNS: managed directly in Cloudflare (domain + hosting same account)
 
 ---
 

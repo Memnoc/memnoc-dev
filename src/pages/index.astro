@@ -14,7 +14,7 @@ const projects = [
     name: 'StarScript',
     blurb: 'Lox-flavored interpreter in C. Following Crafting Interpreters but extended — named grammar rules, custom error handling, going past the book.',
     langs: ['C'],
-    status: 'Personalized from CI',
+    status: 'Personalized from project',
     url: 'https://github.com/Memnoc/StarScript',
   },
   {
@@ -37,7 +37,7 @@ type StatusKey = typeof projects[number]['status'];
 
 const statusClass: Record<StatusKey, string> = {
   'Original':            'status-original',
-  'Personalized from CI': 'status-personalized-from-ci',
+  'Personalized from CI': 'status-personalized-from-project',
   'WIP':                 'status-wip',
 };
 ---
