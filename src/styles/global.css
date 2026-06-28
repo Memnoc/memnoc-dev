@@ -58,7 +58,9 @@
 }
 
 /* ——— Reset ——— */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -68,10 +70,12 @@
 html {
   background-color: var(--rp-base);
   color: var(--rp-text);
-  font-family: -apple-system, ui-sans-serif, system-ui, 'Segoe UI', sans-serif;
+  font-family: -apple-system, ui-sans-serif, system-ui, "Segoe UI", sans-serif;
   font-size: 16px;
   line-height: 1.65;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
 }
 
 body {
@@ -89,7 +93,9 @@ a:hover {
   text-decoration: underline;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-weight: 600;
   line-height: 1.3;
 }
@@ -111,7 +117,8 @@ p:last-child {
 }
 
 code {
-  font-family: 'JetBrains Mono', 'Berkeley Mono', 'Cascadia Code', ui-monospace, monospace;
+  font-family:
+    "JetBrains Mono", "Berkeley Mono", "Cascadia Code", ui-monospace, monospace;
   font-size: 0.875em;
   background: var(--rp-surface);
   padding: 0.1em 0.3em;
@@ -119,7 +126,8 @@ code {
 }
 
 pre {
-  font-family: 'JetBrains Mono', 'Berkeley Mono', 'Cascadia Code', ui-monospace, monospace;
+  font-family:
+    "JetBrains Mono", "Berkeley Mono", "Cascadia Code", ui-monospace, monospace;
   font-size: 0.875em;
   background: var(--rp-surface);
   padding: 1rem 1.25rem;
@@ -133,7 +141,8 @@ pre code {
   padding: 0;
 }
 
-ul, ol {
+ul,
+ol {
   padding-left: 1.25rem;
 }
 
@@ -159,7 +168,7 @@ li {
 }
 
 .nav-clock {
-  font-family: ui-monospace, 'Cascadia Code', 'SF Mono', monospace;
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", monospace;
   font-size: 0.8rem;
   color: var(--rp-subtle);
   letter-spacing: 0.02em;
@@ -171,14 +180,16 @@ li {
 }
 
 .site-nav .nav-links a {
-  font-family: ui-monospace, 'Cascadia Code', 'SF Mono', monospace;
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", monospace;
   font-size: 0.85rem;
   color: var(--rp-subtle);
   text-decoration: none;
   letter-spacing: 0.03em;
   padding-bottom: 2px;
   border-bottom: 1px solid transparent;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .site-nav .nav-links a:hover {
@@ -203,7 +214,10 @@ li {
   line-height: 0;
   display: flex;
   align-items: center;
-  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease;
 }
 
 #theme-toggle:hover {
@@ -213,17 +227,29 @@ li {
 }
 
 /* Default dawn: sun visible, moon hidden */
-#theme-toggle .icon-moon { display: none; }
-#theme-toggle .icon-dawn { display: inline; }
+#theme-toggle .icon-moon {
+  display: none;
+}
+#theme-toggle .icon-dawn {
+  display: inline;
+}
 
 /* Moon theme: swap icons */
-[data-theme="moon"] #theme-toggle .icon-dawn { display: none; }
-[data-theme="moon"] #theme-toggle .icon-moon { display: inline; }
+[data-theme="moon"] #theme-toggle .icon-dawn {
+  display: none;
+}
+[data-theme="moon"] #theme-toggle .icon-moon {
+  display: inline;
+}
 
 /* Fallback for system dark before JS runs */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="dawn"]) #theme-toggle .icon-dawn { display: none; }
-  :root:not([data-theme="dawn"]) #theme-toggle .icon-moon { display: inline; }
+  :root:not([data-theme="dawn"]) #theme-toggle .icon-dawn {
+    display: none;
+  }
+  :root:not([data-theme="dawn"]) #theme-toggle .icon-moon {
+    display: inline;
+  }
 }
 
 /* ——— Profile header ——— */
@@ -373,7 +399,7 @@ section {
 }
 
 .demo-tab {
-  font-family: ui-monospace, 'Cascadia Code', 'SF Mono', monospace;
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", monospace;
   font-size: 0.8rem;
   background: none;
   border: 1px solid transparent;
@@ -381,7 +407,9 @@ section {
   padding: 0.2rem 0.6rem;
   color: var(--rp-subtle);
   cursor: pointer;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .demo-tab:hover {
@@ -395,7 +423,7 @@ section {
 }
 
 .demo-source-link {
-  font-family: ui-monospace, 'Cascadia Code', 'SF Mono', monospace;
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", monospace;
   font-size: 0.75rem;
   color: var(--rp-muted);
   text-decoration: none;
@@ -425,7 +453,7 @@ section {
 }
 
 .shell-line {
-  font-family: ui-monospace, 'Cascadia Code', 'SF Mono', monospace;
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", monospace;
   font-size: 0.85rem;
   line-height: 1.5;
   color: var(--rp-text);
@@ -457,7 +485,7 @@ section {
 }
 
 .shell-input {
-  font-family: ui-monospace, 'Cascadia Code', 'SF Mono', monospace;
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", monospace;
   font-size: 0.85rem;
   color: var(--rp-foam);
   background: transparent;
@@ -479,7 +507,7 @@ section {
   border: 1px solid var(--rp-hl-high);
   border-radius: 4px;
   padding: 0.45rem 0.75rem;
-  font-family: 'JetBrains Mono', 'Berkeley Mono', ui-monospace, monospace;
+  font-family: "JetBrains Mono", "Berkeley Mono", ui-monospace, monospace;
   font-size: 0.875rem;
   color: var(--rp-text);
   outline: none;
@@ -499,7 +527,7 @@ section {
 }
 
 .example-chip {
-  font-family: 'JetBrains Mono', 'Berkeley Mono', ui-monospace, monospace;
+  font-family: "JetBrains Mono", "Berkeley Mono", ui-monospace, monospace;
   font-size: 0.75rem;
   background: var(--rp-overlay);
   color: var(--rp-subtle);
@@ -507,7 +535,9 @@ section {
   padding: 0.15rem 0.5rem;
   border-radius: 3px;
   cursor: pointer;
-  transition: color 0.1s, border-color 0.1s;
+  transition:
+    color 0.1s,
+    border-color 0.1s;
 }
 
 .example-chip:hover {
@@ -523,7 +553,7 @@ section {
 .ast-viewer .ast-error {
   font-size: 0.8rem;
   color: var(--rp-love);
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
   margin: 0;
 }
 
@@ -564,7 +594,7 @@ section {
 
 .ast-node text {
   fill: var(--rp-text);
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 11px;
   user-select: none;
 }
@@ -623,7 +653,7 @@ section {
 
 .tag {
   font-size: 0.75rem;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
   background: var(--rp-overlay);
   color: var(--rp-subtle);
   padding: 0.1rem 0.45rem;
@@ -632,7 +662,7 @@ section {
 
 .status {
   font-size: 0.7rem;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
   padding: 0.1rem 0.5rem;
   border-radius: 3px;
   text-transform: lowercase;
@@ -643,7 +673,7 @@ section {
   color: var(--rp-foam);
 }
 
-.status-personalized-from-ci {
+.status-personalized-from-project {
   background: color-mix(in srgb, var(--rp-iris) 12%, transparent);
   color: var(--rp-iris);
 }
@@ -702,7 +732,7 @@ section {
 
 .post-date {
   font-size: 0.8rem;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
   color: var(--rp-muted);
   white-space: nowrap;
 }
@@ -764,7 +794,7 @@ a.post-tag:hover {
 
 .post-meta {
   font-size: 0.8rem;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
   color: var(--rp-muted);
   margin-bottom: 0;
 }
@@ -828,7 +858,7 @@ a.post-tag:hover {
 }
 
 .build-hash {
-  font-family: ui-monospace, 'Cascadia Code', 'SF Mono', monospace;
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", monospace;
   font-size: 0.75rem;
   color: var(--rp-muted);
   text-decoration: none;
