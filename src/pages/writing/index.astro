@@ -21,22 +21,26 @@ function firstImage(body: string): string | null {
   return m ? m[1] : null;
 }
 
-function fallbackImage(tags: string[], title: string): string {
-  const keywords = tags.length > 0 ? tags.slice(0, 2).join(',') : title.split(' ').slice(0, 2).join(',');
-  return `https://loremflickr.com/400/300/${encodeURIComponent(keywords)}`;
+function placeholderSvg(index: number): string {
+  const variants = [
+    `<svg width="120" height="80" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#eb6f92"/><stop offset="100%" stop-color="#3e8fb0"/></linearGradient></defs><rect width="120" height="80" fill="url(#g)"/></svg>`,
+    `<svg width="120" height="80" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="80" fill="#286983"/><path d="M0 20h120M0 40h120M0 60h120M30 0v80M60 0v80M90 0v80" stroke="#9ccfd8" stroke-width="0.5" opacity="0.5"/></svg>`,
+    `<svg width="120" height="80" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="80" fill="#44415a"/><circle cx="60" cy="40" r="38" fill="none" stroke="#c4a7e7" stroke-width="1" opacity="0.4"/><circle cx="60" cy="40" r="25" fill="none" stroke="#c4a7e7" stroke-width="1" opacity="0.5"/><circle cx="60" cy="40" r="12" fill="#c4a7e7" opacity="0.3"/></svg>`,
+    `<svg width="120" height="80" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="80" fill="#2a273f"/><line x1="0" y1="80" x2="120" y2="0" stroke="#f6c177" stroke-width="40" opacity="0.1"/><line x1="-30" y1="80" x2="90" y2="0" stroke="#f6c177" stroke-width="20" opacity="0.08"/><line x1="30" y1="80" x2="150" y2="0" stroke="#f6c177" stroke-width="20" opacity="0.08"/></svg>`,
+    `<svg width="120" height="80" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="80" fill="#393552"/><circle cx="120" cy="0" r="90" fill="none" stroke="#9ccfd8" stroke-width="1.5" opacity="0.35"/><circle cx="120" cy="0" r="60" fill="none" stroke="#9ccfd8" stroke-width="1.5" opacity="0.3"/><circle cx="120" cy="0" r="30" fill="#9ccfd8" opacity="0.12"/></svg>`,
+  ];
+  return `data:image/svg+xml,${encodeURIComponent(variants[index % variants.length])}`;
 }
 
-function thumbFor(post: { data: { image?: string; tags: string[]; title: string }; body?: string }): { url: string; credit: boolean } {
-  const manual = post.data.image ?? firstImage(post.body ?? '');
-  if (manual) return { url: manual, credit: false };
-  return { url: fallbackImage(post.data.tags, post.data.title), credit: true };
+function thumbFor(post: { data: { image?: string; tags: string[]; title: string }; body?: string }, index: number): string {
+  return post.data.image ?? firstImage(post.body ?? '') ?? placeholderSvg(index);
 }
 ---
 
 <Base title="Writing — Matteo Stara (memnoc)" description="Notes on compilers, systems software, and language implementation.">
   <h2>Writing</h2>
   <div class="post-list">
-    {posts.map(post => (
+    {posts.map((post, i) => (
       <div class="post-item">
         <div class="post-meta-line">
           <span class="post-date">{formatDate(post.data.date)}</span>
@@ -58,14 +62,9 @@ function thumbFor(post: { data: { image?: string; tags: string[]; title: string 
             <a href={`/writing/${slug(post.id)}`} class="post-title-link">{post.data.title}</a>
             <p class="post-description">{post.data.description}</p>
           </div>
-          {(() => { const t = thumbFor(post); return (
-            <div class="post-thumb-wrap">
-              <a href={`/writing/${slug(post.id)}`} class="post-thumb-link">
-                <img src={t.url} alt="" class="post-thumb" loading="lazy" />
-              </a>
-              {t.credit && <a href="https://flickr.com/creativecommons" target="_blank" rel="noopener" class="post-thumb-credit">Photo: Flickr CC</a>}
-            </div>
-          ); })()}
+          <a href={`/writing/${slug(post.id)}`} class="post-thumb-link">
+            <img src={thumbFor(post, i)} alt="" class="post-thumb" loading="lazy" />
+          </a>
         </div>
       </div>
     ))}
