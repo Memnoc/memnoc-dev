@@ -22,8 +22,8 @@ function firstImage(body: string): string | null {
 }
 
 function fallbackImage(tags: string[], title: string): string {
-  const keywords = tags.length > 0 ? tags.join(',') : title.split(' ').slice(0, 3).join(',');
-  return `https://source.unsplash.com/400x300/?${encodeURIComponent(keywords)}`;
+  const keywords = tags.length > 0 ? tags.slice(0, 2).join(',') : title.split(' ').slice(0, 2).join(',');
+  return `https://loremflickr.com/400/300/${encodeURIComponent(keywords)}`;
 }
 
 function thumbFor(post: { data: { image?: string; tags: string[]; title: string }; body?: string }): { url: string; credit: boolean } {
@@ -63,7 +63,7 @@ function thumbFor(post: { data: { image?: string; tags: string[]; title: string 
               <a href={`/writing/${slug(post.id)}`} class="post-thumb-link">
                 <img src={t.url} alt="" class="post-thumb" loading="lazy" />
               </a>
-              {t.credit && <a href="https://unsplash.com" target="_blank" rel="noopener" class="post-thumb-credit">Photo: Unsplash</a>}
+              {t.credit && <a href="https://flickr.com/creativecommons" target="_blank" rel="noopener" class="post-thumb-credit">Photo: Flickr CC</a>}
             </div>
           ); })()}
         </div>
