@@ -15,6 +15,11 @@ function readTime(body: string) {
   const words = body.trim().split(/\s+/).length;
   return `${Math.max(1, Math.round(words / 200))} MIN READ`;
 }
+
+function firstImage(body: string): string | null {
+  const m = body.match(/!\[.*?\]\((.+?)\)/);
+  return m ? m[1] : null;
+}
 ---
 
 <Base title="Writing — Matteo Stara (memnoc)" description="Notes on compilers, systems software, and language implementation.">
@@ -42,9 +47,9 @@ function readTime(body: string) {
             <a href={`/writing/${slug(post.id)}`} class="post-title-link">{post.data.title}</a>
             <p class="post-description">{post.data.description}</p>
           </div>
-          {post.data.image && (
+          {(post.data.image ?? firstImage(post.body ?? '')) && (
             <a href={`/writing/${slug(post.id)}`} class="post-thumb-link">
-              <img src={post.data.image} alt="" class="post-thumb" loading="lazy" />
+              <img src={post.data.image ?? firstImage(post.body ?? '')!} alt="" class="post-thumb" loading="lazy" />
             </a>
           )}
         </div>
