@@ -30,7 +30,7 @@ jobs:
       - name: Typecheck
         run: pnpm typecheck
 
-      - name: Verify live public Built evidence
+      - name: Test Built evidence verifier with local fixtures
         run: pnpm test:evidence
 
       - name: Build production site

@@ -24,10 +24,12 @@ verified; deployment is not evidence of completion.
 - [ ] `pnpm test:browser` passes the complete production-built browser suite,
   including the automated accessibility checks on Home, About, the empty or
   hidden Writing state, Dawn and Moon, a valid AST tree, and an AST error.
-- [ ] `pnpm test:evidence` passes against the current public default branches
+- [ ] `pnpm test:evidence` passes the offline verifier tests.
+- [ ] `pnpm verify:evidence` (or a manual **Audit public Built evidence** run)
+  passes against the current public default branches
   of CodeAtlas and Northstar. Record the reported branch and commit for each.
-- [ ] The candidate CI run passes frozen install, typecheck, live Built
-  evidence, production build, and the full browser/accessibility suite in one
+- [ ] The candidate CI run passes frozen install, typecheck, offline evidence
+  tests, production build, and the full browser/accessibility suite in one
   job. CI run URL:
 
 ## Manual visitor review
@@ -125,8 +127,9 @@ Evidence/notes:
   interaction, theme behavior, and current public Built evidence are recorded.
 - [ ] Public draft and Launch remain distinct, and every canonical launch-gate
   condition above is checked before promotion.
-- [ ] CI passes frozen install, build, the full browser/accessibility suite, and
-  live public Built-evidence verification together.
+- [ ] CI passes frozen install, typecheck, offline evidence tests, build, and
+  the full browser/accessibility suite. A separate live public Built-evidence
+  audit passes before promotion; its result does not gate ordinary deployment.
 
 ## Promotion decision
 

@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test('hiring manager sees evidence-bearing Built entries with distinct provenance', async ({ page, request }) => {
+test('hiring manager sees evidence-bearing Built entries with distinct provenance', async ({ page }) => {
   await page.goto('/');
 
   const built = page.getByRole('region', { name: 'Built' });
@@ -34,17 +34,9 @@ test('hiring manager sees evidence-bearing Built entries with distinct provenanc
     'href',
     'https://github.com/Memnoc/northstar',
   );
-
-  for (const link of [
-    codeAtlas.getByRole('link', { name: 'View CodeAtlas source' }),
-    northstar.getByRole('link', { name: 'View Northstar source' }),
-  ]) {
-    const response = await request.get(await link.getAttribute('href') as string);
-    expect(response.ok()).toBe(true);
-  }
 });
 
-test('visitor sees StarScript separately as honest Current work', async ({ page, request }) => {
+test('visitor sees StarScript separately as honest Current work', async ({ page }) => {
   await page.goto('/');
 
   const currentWork = page.getByRole('region', { name: 'Current work' });
@@ -65,9 +57,6 @@ test('visitor sees StarScript separately as honest Current work', async ({ page,
     'https://github.com/Memnoc/StarScript',
   );
   await expect(starScript).not.toContainText('Source currently unavailable');
-
-  const response = await request.get(await sourceLink.getAttribute('href') as string);
-  expect(response.ok()).toBe(true);
 
   await expect(starScript).not.toContainText(/parser|grammar|error recovery|shared AST/i);
   await expect(page.locator('main')).not.toContainText(

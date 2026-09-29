@@ -193,6 +193,23 @@ than editorial promises.
 
 ## Testing Decisions
 
+### 2026-09-29 amendment — separate live audits from CI
+
+The launch owner approved removing live repository state from ordinary CI.
+`Verify` retains typechecking, the production build, browser/accessibility
+tests, and offline tests through the public `verifyBuiltEvidence` interface.
+Those verifier tests use controlled HTTP responses and local source archives
+to exercise success and failure behavior without contacting GitHub.
+Browser tests assert the rendered project links without fetching their external
+destinations, including the Current work link.
+The live external-evidence seam remains a launch requirement, exercised by
+`pnpm verify:evidence` in a separate weekly/manual audit workflow. Audit
+failures must remain visible but must not gate ordinary CI or deployment.
+This amends the original testing decisions below wherever they require live
+evidence in the same CI job; historical acceptance results remain unchanged.
+
+### Original testing decisions
+
 - **Primary seam — production-built site in a browser.** Build and serve the
   real static output, then use a headless browser to assert positioning copy,
   project classification, hidden Writing state, draft exclusion, noindex,

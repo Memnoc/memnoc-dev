@@ -29,22 +29,29 @@ another package-manager launcher can use that exact version.
 ```sh
 pnpm install --frozen-lockfile        # install without changing pnpm-lock.yaml
 pnpm typecheck                        # typecheck TypeScript
-pnpm verify:evidence                  # verify Built candidates on public GitHub
+pnpm test:evidence                    # offline evidence-verifier tests
 pnpm build                            # production output → dist/
 pnpm exec playwright install chromium # one-time local browser install
 pnpm test:browser                     # production browser + accessibility suite
 pnpm test:accessibility               # focused accessibility/assembled-quality checks
 ```
 
-`pnpm verify:evidence` queries the unauthenticated public default branches of
+Normal `Verify` CI runs typechecking, the offline evidence-verifier tests,
+the production build, and the full browser/accessibility suite. The verifier
+tests use controlled HTTP responses and a local source archive; they never
+contact linked repositories.
+
+For a live audit, `pnpm verify:evidence` queries the unauthenticated public default branches of
 CodeAtlas and Northstar. It fails if either repository or default branch is
 unavailable, or if working source, a clean verification run, runnable
 instructions, licensing, known limitations, or the agreed provenance account
 is missing. CodeAtlas's public CI must pass at the verified revision;
 Northstar's validation and installer suites run from a revision-pinned archive.
-`pnpm test:evidence`
-also exercises those failure messages against live GitHub responses; CI runs
-that suite before building the portfolio.
+The separate [Audit public Built evidence](.github/workflows/evidence-audit.yml)
+workflow runs this command each Monday at 08:23 UTC and supports manual runs
+from GitHub Actions. Audit failures remain visible in that workflow and do
+not gate ordinary CI or deployment. Run a fresh live audit before launch and
+record its reported revisions in the checklist.
 
 Before promoting the Public draft as the launched portfolio, complete
 [`docs/pre-launch-checklist.md`](docs/pre-launch-checklist.md). Deployment does
