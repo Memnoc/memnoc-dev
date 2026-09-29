@@ -8,7 +8,7 @@ async function forEachVisibleAction(
 ) {
   for (const path of publicDraftRoutes) {
     await page.goto(path);
-    const actions = page.locator('a[href], button, input');
+    const actions = page.locator('a[href], button, input, select');
 
     for (let index = 0; index < await actions.count(); index += 1) {
       const action = actions.nth(index);
@@ -53,7 +53,7 @@ test('navigation, theme, and parser examples expose their current state', async 
 
   await expect(page.getByRole('link', { name: 'home' })).toHaveAttribute('aria-current', 'page');
   await expect(page.getByRole('link', { name: 'about' })).not.toHaveAttribute('aria-current');
-  await expect(page.getByRole('button', { name: 'Theme: Dawn' })).toHaveAttribute('aria-pressed', 'false');
+  await expect(page.getByRole('combobox', { name: 'Theme', exact: true })).toHaveValue('dawn');
   await expect(page.getByRole('button', { name: '1 + 2 * 3', exact: true })).toHaveAttribute('aria-pressed', 'true');
 
   await page.getByRole('button', { name: '(a + b) * c', exact: true }).click();
@@ -105,7 +105,7 @@ for (const viewport of [
     await page.goto('/');
     const homePrimaryActions = [
       page.getByRole('link', { name: 'about' }),
-      page.getByRole('button', { name: /Theme:/ }),
+      page.getByRole('combobox', { name: 'Theme', exact: true }),
       page.getByRole('link', { name: 'GitHub' }),
       page.getByRole('link', { name: 'LinkedIn' }),
       page.getByRole('link', { name: 'La Botteghina' }),
@@ -126,7 +126,7 @@ for (const viewport of [
     await page.goto('/about/');
     const aboutPrimaryActions = [
       page.getByRole('link', { name: 'home' }),
-      page.getByRole('button', { name: /Theme:/ }),
+      page.getByRole('combobox', { name: 'Theme', exact: true }),
       page.getByRole('link', { name: 'labotteghina.gallery' }),
       page.getByRole('link', { name: 'memnochmod@gmail.com' }),
       page.getByRole('link', { name: 'github.com/Memnoc' }),

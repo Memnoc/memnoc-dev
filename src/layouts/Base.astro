@@ -47,7 +47,7 @@ const canonicalUrl = new URL(canonicalPath, SITE_ORIGIN).href;
     <script is:inline>
       (function () {
         var saved = localStorage.getItem('rp-theme');
-        if (saved === 'moon' || saved === 'dawn') {
+        if (saved === 'rose-pine' || saved === 'moon' || saved === 'dawn') {
           document.documentElement.setAttribute('data-theme', saved);
         } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
           document.documentElement.setAttribute('data-theme', 'moon');
@@ -75,44 +75,27 @@ const canonicalUrl = new URL(canonicalPath, SITE_ORIGIN).href;
           <a href="/writing" class:list={[{ active: normalizedCurrentPath.startsWith('/writing') }]} aria-current={normalizedCurrentPath.startsWith('/writing') ? 'page' : undefined}>writing</a>
         )}
       </div>
-      <button id="theme-toggle" aria-label="Theme" aria-pressed="false">
-        <svg class="icon-dawn" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="4"/>
-          <line x1="12" y1="2" x2="12" y2="5"/>
-          <line x1="12" y1="19" x2="12" y2="22"/>
-          <line x1="2" y1="12" x2="5" y2="12"/>
-          <line x1="19" y1="12" x2="22" y2="12"/>
-          <line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/>
-          <line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/>
-          <line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/>
-          <line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/>
-        </svg>
-        <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-        </svg>
-      </button>
+      <select id="theme-select" aria-label="Theme">
+        <option value="rose-pine">Rosé Pine</option>
+        <option value="moon">Moon</option>
+        <option value="dawn">Dawn</option>
+      </select>
     </nav>
     <main>
       <slot />
     </main>
 
     <script>
-      const btn = document.getElementById('theme-toggle');
+      const themeSelect = document.querySelector<HTMLSelectElement>('#theme-select');
 
-      function updateThemeControl(theme: string) {
-        btn?.setAttribute('aria-label', `Theme: ${theme === 'moon' ? 'Moon' : 'Dawn'}`);
-        btn?.setAttribute('aria-pressed', String(theme === 'moon'));
+      if (themeSelect) {
+        themeSelect.value = document.documentElement.getAttribute('data-theme') ?? 'dawn';
+        themeSelect.addEventListener('change', () => {
+          const theme = themeSelect.value;
+          document.documentElement.setAttribute('data-theme', theme);
+          localStorage.setItem('rp-theme', theme);
+        });
       }
-
-      updateThemeControl(document.documentElement.getAttribute('data-theme') ?? 'dawn');
-
-      btn?.addEventListener('click', () => {
-        const current = document.documentElement.getAttribute('data-theme');
-        const next = current === 'moon' ? 'dawn' : 'moon';
-        document.documentElement.setAttribute('data-theme', next);
-        localStorage.setItem('rp-theme', next);
-        updateThemeControl(next);
-      });
 
       const clock = document.getElementById('utc-clock');
       function tick() {

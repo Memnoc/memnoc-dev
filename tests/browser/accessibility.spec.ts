@@ -10,16 +10,20 @@ async function expectNoAccessibilityViolations(page: Page) {
   expect(violations).toEqual([]);
 }
 
-test('Home has no automated accessibility violations in Dawn and Moon', async ({ page }) => {
+test('Home has no automated accessibility violations in Dawn, Moon, and Rosé Pine', async ({ page }) => {
   await page.emulateMedia({ colorScheme: 'light' });
   await page.goto('/');
 
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dawn');
   await expectNoAccessibilityViolations(page);
 
-  await page.getByRole('button', { name: 'Theme: Dawn' }).click();
+  await page.getByRole('combobox', { name: 'Theme', exact: true }).selectOption('moon');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'moon');
   await expect(page.locator('html')).toHaveCSS('background-color', 'rgb(35, 33, 54)');
+  await expectNoAccessibilityViolations(page);
+
+  await page.getByRole('combobox', { name: 'Theme', exact: true }).selectOption('rose-pine');
+  await expect(page.locator('html')).toHaveCSS('background-color', 'rgb(25, 23, 36)');
   await expectNoAccessibilityViolations(page);
 });
 
@@ -29,16 +33,20 @@ test('About has no automated accessibility violations', async ({ page }) => {
   await expectNoAccessibilityViolations(page);
 });
 
-test('Writing index has no automated accessibility violations in Dawn and Moon', async ({ page }) => {
+test('Writing index has no automated accessibility violations in Dawn, Moon, and Rosé Pine', async ({ page }) => {
   await page.emulateMedia({ colorScheme: 'light' });
   await page.goto('/writing/');
 
   await expect(page.getByRole('heading', { level: 2, name: 'Writing' })).toBeVisible();
   await expectNoAccessibilityViolations(page);
 
-  await page.getByRole('button', { name: 'Theme: Dawn' }).click();
+  await page.getByRole('combobox', { name: 'Theme', exact: true }).selectOption('moon');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'moon');
   await expect(page.locator('html')).toHaveCSS('background-color', 'rgb(35, 33, 54)');
+  await expectNoAccessibilityViolations(page);
+
+  await page.getByRole('combobox', { name: 'Theme', exact: true }).selectOption('rose-pine');
+  await expect(page.locator('html')).toHaveCSS('background-color', 'rgb(25, 23, 36)');
   await expectNoAccessibilityViolations(page);
 });
 

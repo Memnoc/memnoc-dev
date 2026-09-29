@@ -122,25 +122,19 @@ test('initial theme follows the operating-system preference and exposes its stat
     window as Window & { firstFrameTheme?: string | null }
   ).firstFrameTheme)).toBe('moon');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'moon');
-  await expect(page.getByRole('button', { name: 'Theme: Moon' })).toHaveAttribute(
-    'aria-pressed',
-    'true',
-  );
+  await expect(page.getByRole('combobox', { name: 'Theme', exact: true })).toHaveValue('moon');
 });
 
 test('manual theme choice persists across navigation and reloads', async ({ page }) => {
   await page.emulateMedia({ colorScheme: 'light' });
   await page.goto('/');
 
-  const dawnTheme = page.getByRole('button', { name: 'Theme: Dawn' });
-  await expect(dawnTheme).toHaveAttribute('aria-pressed', 'false');
-  await dawnTheme.click();
+  const theme = page.getByRole('combobox', { name: 'Theme', exact: true });
+  await expect(theme).toHaveValue('dawn');
+  await theme.selectOption('moon');
 
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'moon');
-  await expect(page.getByRole('button', { name: 'Theme: Moon' })).toHaveAttribute(
-    'aria-pressed',
-    'true',
-  );
+  await expect(page.getByRole('combobox', { name: 'Theme', exact: true })).toHaveValue('moon');
 
   await page.getByRole('link', { name: 'about' }).click();
   await expect(page).toHaveURL(/\/about$/);
@@ -148,17 +142,14 @@ test('manual theme choice persists across navigation and reloads', async ({ page
 
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'moon');
-  await expect(page.getByRole('button', { name: 'Theme: Moon' })).toHaveAttribute(
-    'aria-pressed',
-    'true',
-  );
+  await expect(page.getByRole('combobox', { name: 'Theme', exact: true })).toHaveValue('moon');
 });
 
 test('manual Dawn choice overrides a dark operating-system preference', async ({ page }) => {
   await page.emulateMedia({ colorScheme: 'dark' });
   await page.goto('/');
 
-  await page.getByRole('button', { name: 'Theme: Moon' }).click();
+  await page.getByRole('combobox', { name: 'Theme', exact: true }).selectOption('dawn');
 
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dawn');
   await expect(page.locator('html')).toHaveCSS('background-color', 'rgb(250, 244, 237)');
@@ -185,5 +176,68 @@ test('manual Dawn choice overrides a dark operating-system preference', async ({
     background: 'rgb(250, 244, 237)',
   });
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dawn');
+  await expect(page.locator('html')).toHaveCSS('background-color', 'rgb(250, 244, 237)');
+});
+
+test('saved Rosé Pine overrides the system theme before the first paint', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'dark' });
+  await page.addInitScript(() => {
+    localStorage.setItem('rp-theme', 'rose-pine');
+    requestAnimationFrame(() => {
+      const root = document.documentElement;
+      (window as Window & {
+        firstFrameRosePine?: { theme: string | null; background: string };
+      }).firstFrameRosePine = {
+        theme: root.getAttribute('data-theme'),
+        background: getComputedStyle(root).backgroundColor,
+      };
+    });
+  });
+  await page.goto('/writing/aoc-16_0/');
+
+  await expect.poll(() => page.evaluate(() => (
+    window as Window & {
+      firstFrameRosePine?: { theme: string | null; background: string };
+    }
+  ).firstFrameRosePine)).toEqual({
+    theme: 'rose-pine',
+    background: 'rgb(25, 23, 36)',
+  });
+  await expect(page.locator('html')).toHaveCSS('color', 'rgb(224, 222, 244)');
+});
+
+test('visitor can choose Rosé Pine and keep it across article navigation and reloads', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'light' });
+  await page.goto('/');
+  const theme = page.getByRole('combobox', { name: 'Theme', exact: true });
+  await expect(theme).toHaveValue('dawn');
+  await theme.selectOption({ label: 'Rosé Pine' });
+  await expect(page.locator('html')).toHaveCSS('background-color', 'rgb(25, 23, 36)');
+
+  await page.getByRole('navigation').getByRole('link', { name: 'writing' }).click();
+  await page.getByRole('link', { name: 'Get your brain to the gym!', exact: true }).click();
+  await expect(theme).toHaveValue('rose-pine');
+  await expect(page.locator('html')).toHaveCSS('background-color', 'rgb(25, 23, 36)');
+  await page.reload();
+  await expect(theme).toHaveValue('rose-pine');
+  await expect(page.locator('html')).toHaveCSS('background-color', 'rgb(25, 23, 36)');
+});
+
+test('keyboard user can select every theme', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'light' });
+  await page.goto('/');
+  const theme = page.getByRole('combobox', { name: 'Theme', exact: true });
+  await theme.focus();
+  await theme.press('Home');
+  await theme.press('Enter');
+  await expect(theme).toHaveValue('rose-pine');
+  await expect(page.locator('html')).toHaveCSS('background-color', 'rgb(25, 23, 36)');
+  await theme.press('ArrowDown');
+  await theme.press('Enter');
+  await expect(theme).toHaveValue('moon');
+  await expect(page.locator('html')).toHaveCSS('background-color', 'rgb(35, 33, 54)');
+  await theme.press('End');
+  await theme.press('Enter');
+  await expect(theme).toHaveValue('dawn');
   await expect(page.locator('html')).toHaveCSS('background-color', 'rgb(250, 244, 237)');
 });

@@ -1,6 +1,7 @@
 /* Rosé Pine Dawn — light */
 :root,
 [data-theme="dawn"] {
+  color-scheme: light;
   --rp-base: #faf4ed;
   --rp-surface: #fffaf3;
   --rp-overlay: #f2e9e1;
@@ -26,7 +27,8 @@
 
 /* Rosé Pine Moon — dark (OS default) */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="dawn"]) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
     --rp-base: #232136;
     --rp-surface: #2a273f;
     --rp-overlay: #393552;
@@ -52,6 +54,7 @@
 }
 
 [data-theme="moon"] {
+  color-scheme: dark;
   --rp-base: #232136;
   --rp-surface: #2a273f;
   --rp-overlay: #393552;
@@ -67,6 +70,32 @@
   --rp-hl-low: #2a283e;
   --rp-hl-med: #44415a;
   --rp-hl-high: #56526e;
+  --rp-muted-text: #aaa6c3;
+  --rp-subtle-text: #b5b1ca;
+  --rp-love-text: #eb6f92;
+  --rp-gold-text: #f6c177;
+  --rp-foam-text: #9ccfd8;
+  --rp-iris-text: #c4a7e7;
+}
+
+/* Rosé Pine — original dark palette */
+[data-theme="rose-pine"] {
+  color-scheme: dark;
+  --rp-base: #191724;
+  --rp-surface: #1f1d2e;
+  --rp-overlay: #26233a;
+  --rp-muted: #6e6a86;
+  --rp-subtle: #908caa;
+  --rp-text: #e0def4;
+  --rp-love: #eb6f92;
+  --rp-gold: #f6c177;
+  --rp-rose: #ebbcba;
+  --rp-pine: #31748f;
+  --rp-foam: #9ccfd8;
+  --rp-iris: #c4a7e7;
+  --rp-hl-low: #21202e;
+  --rp-hl-med: #403d52;
+  --rp-hl-high: #524f67;
   --rp-muted-text: #aaa6c3;
   --rp-subtle-text: #b5b1ca;
   --rp-love-text: #eb6f92;
@@ -111,7 +140,7 @@ a:hover {
   text-decoration: underline;
 }
 
-:where(a, button, input):focus-visible {
+:where(a, button, input, select):focus-visible {
   outline: 3px solid var(--rp-iris);
   outline-offset: 3px;
 }
@@ -226,53 +255,21 @@ li {
   border-color: var(--rp-iris);
 }
 
-/* ——— Theme toggle ——— */
-#theme-toggle {
-  background: none;
+/* ——— Theme selector ——— */
+#theme-select {
+  background: var(--rp-surface);
   border: 1px solid var(--rp-hl-med);
   border-radius: 4px;
   cursor: pointer;
   padding: 0.3rem;
-  color: var(--rp-subtle-text);
-  line-height: 0;
-  display: flex;
-  align-items: center;
-  transition:
-    color 0.15s ease,
-    border-color 0.15s ease,
-    background 0.15s ease;
-}
-
-#theme-toggle:hover {
   color: var(--rp-text);
+  font: inherit;
+  font-size: 0.8rem;
+  max-width: 100%;
+}
+
+#theme-select:hover {
   border-color: var(--rp-hl-high);
-  background: var(--rp-overlay);
-}
-
-/* Default dawn: sun visible, moon hidden */
-#theme-toggle .icon-moon {
-  display: none;
-}
-#theme-toggle .icon-dawn {
-  display: inline;
-}
-
-/* Moon theme: swap icons */
-[data-theme="moon"] #theme-toggle .icon-dawn {
-  display: none;
-}
-[data-theme="moon"] #theme-toggle .icon-moon {
-  display: inline;
-}
-
-/* Fallback for system dark before JS runs */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="dawn"]) #theme-toggle .icon-dawn {
-    display: none;
-  }
-  :root:not([data-theme="dawn"]) #theme-toggle .icon-moon {
-    display: inline;
-  }
 }
 
 /* ——— Profile header ——— */

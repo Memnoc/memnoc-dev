@@ -10,6 +10,10 @@ isolated React 19 island. Everything else ships zero framework JavaScript.
 
 Content is managed through Astro's typed content layer — blog posts are Markdown files with Zod-validated frontmatter, compiled to static routes at build time. No CMS, no database.
 
+The navigation's Theme dropdown offers Rosé Pine, Moon, and Dawn across the
+site and blog. Choices persist across pages and reloads; without a saved
+choice, the site uses Moon for a dark system preference and Dawn for light.
+
 ## Stack
 
 | Layer | Choice | Why |
