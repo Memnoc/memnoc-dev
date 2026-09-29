@@ -725,7 +725,7 @@ section {
 
 a.post-tag {
   text-decoration: none;
-  color: var(--rp-muted-text);
+  color: var(--rp-text);
   transition: color 0.1s;
 }
 

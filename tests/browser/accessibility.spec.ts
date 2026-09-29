@@ -29,12 +29,16 @@ test('About has no automated accessibility violations', async ({ page }) => {
   await expectNoAccessibilityViolations(page);
 });
 
-test('empty Writing state is accessible and remains hidden from navigation', async ({ page }) => {
+test('Writing index has no automated accessibility violations in Dawn and Moon', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'light' });
   await page.goto('/writing/');
 
-  await expect(page.getByText('No reviewed writing is published yet.')).toBeVisible();
-  await expect(page.getByRole('navigation').getByRole('link', { name: 'writing' }))
-    .toHaveCount(0);
+  await expect(page.getByRole('heading', { level: 2, name: 'Writing' })).toBeVisible();
+  await expectNoAccessibilityViolations(page);
+
+  await page.getByRole('button', { name: 'Theme: Dawn' }).click();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'moon');
+  await expect(page.locator('html')).toHaveCSS('background-color', 'rgb(35, 33, 54)');
   await expectNoAccessibilityViolations(page);
 });
 

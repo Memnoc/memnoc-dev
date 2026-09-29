@@ -119,7 +119,7 @@ function thumbFor(post: { data: { image?: string; tags: string[]; title: string 
             <a href={`/writing/${slug(post.id)}`} class="post-title-link">{post.data.title}</a>
             <p class="post-description">{post.data.description}</p>
           </div>
-          <a href={`/writing/${slug(post.id)}`} class="post-thumb-link">
+          <a href={`/writing/${slug(post.id)}`} class="post-thumb-link" aria-label={`Read ${post.data.title}`}>
             <img src={thumbFor(post)} alt="" class="post-thumb" loading="lazy" />
           </a>
         </div>
