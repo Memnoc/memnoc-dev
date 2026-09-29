@@ -776,6 +776,13 @@ a.post-tag:hover {
   line-height: 1.75;
 }
 
+.post-body img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
 .post-body h2 {
   font-size: 1.05rem;
   font-weight: 600;
