@@ -13,7 +13,7 @@
     "preview": "astro preview",
     "typecheck": "astro sync && tsc --noEmit",
     "test:evidence": "node --test tests/evidence/built-evidence.test.mjs",
-    "test:browser": "playwright test",
+    "test:browser": "playwright test && playwright test --config tests/article-headers/playwright.config.ts",
     "test:accessibility": "playwright test accessibility.spec.ts assembled-quality.spec.ts",
     "verify:evidence": "node scripts/verify-built-evidence.mjs",
     "astro": "astro"
