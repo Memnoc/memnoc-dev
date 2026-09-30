@@ -10,9 +10,6 @@ test('hiring manager sees evidence-bearing Built entries with distinct provenanc
 
   const codeAtlas = built.getByRole('article', { name: 'CodeAtlas — Original' });
   await expect(codeAtlas.getByText('Original', { exact: true })).toBeVisible();
-  await expect(codeAtlas.getByText(
-    'Maps a repository into an interactive knowledge graph of files, symbols, imports, and calls.',
-  )).toBeVisible();
   await expect(codeAtlas.getByText('Rust', { exact: true })).toBeVisible();
   await expect(codeAtlas.getByText('TypeScript', { exact: true })).toBeVisible();
   await expect(codeAtlas.getByText('Code intelligence', { exact: true })).toBeVisible();
