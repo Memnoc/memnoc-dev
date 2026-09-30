@@ -51,8 +51,8 @@ test('navigation, theme, and parser examples expose their current state', async 
   await page.emulateMedia({ colorScheme: 'light' });
   await page.goto('/');
 
-  await expect(page.getByRole('link', { name: 'home' })).toHaveAttribute('aria-current', 'page');
-  await expect(page.getByRole('link', { name: 'about' })).not.toHaveAttribute('aria-current');
+  await expect(page.getByRole('link', { name: 'Home', exact: true })).toHaveAttribute('aria-current', 'page');
+  await expect(page.getByRole('link', { name: 'About', exact: true })).not.toHaveAttribute('aria-current');
   await expect(page.getByRole('combobox', { name: 'Theme', exact: true })).toHaveValue('dawn');
   await expect(page.getByRole('button', { name: '1 + 2 * 3', exact: true })).toHaveAttribute('aria-pressed', 'true');
 
@@ -61,7 +61,7 @@ test('navigation, theme, and parser examples expose their current state', async 
   await expect(page.getByRole('button', { name: '(a + b) * c', exact: true })).toHaveAttribute('aria-pressed', 'true');
 
   await page.goto('/about/');
-  await expect(page.getByRole('link', { name: 'about' })).toHaveAttribute('aria-current', 'page');
+  await expect(page.getByRole('link', { name: 'About', exact: true })).toHaveAttribute('aria-current', 'page');
 });
 
 test('AST input exposes invalid state and its announced error programmatically', async ({ page }) => {
@@ -104,7 +104,7 @@ for (const viewport of [
 
     await page.goto('/');
     const homePrimaryActions = [
-      page.getByRole('link', { name: 'about' }),
+      page.getByRole('link', { name: 'About', exact: true }),
       page.getByRole('combobox', { name: 'Theme', exact: true }),
       page.getByRole('link', { name: 'GitHub' }),
       page.getByRole('link', { name: 'LinkedIn' }),
@@ -125,7 +125,7 @@ for (const viewport of [
 
     await page.goto('/about/');
     const aboutPrimaryActions = [
-      page.getByRole('link', { name: 'home' }),
+      page.getByRole('link', { name: 'Home', exact: true }),
       page.getByRole('combobox', { name: 'Theme', exact: true }),
       page.getByRole('link', { name: 'labotteghina.gallery' }),
       page.getByRole('link', { name: 'memnochmod@gmail.com' }),
