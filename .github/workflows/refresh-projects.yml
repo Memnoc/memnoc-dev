@@ -1,0 +1,69 @@
+name: Refresh saved project metadata
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '41 7 * * *'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: refresh-project-metadata
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Test refresh with offline fixtures
+        run: node --test tests/projects/refresh-projects.test.mjs
+
+      # Keep successful observations from an update PR that is still awaiting review.
+      - name: Restore pending snapshot
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BASE_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          pending=$(gh pr list --base "$BASE_BRANCH" --head automation/project-metadata --state open --json headRefOid --jq '.[0].headRefOid // empty')
+          if [ -n "$pending" ]; then
+            git fetch --depth=1 origin "$pending"
+            git show FETCH_HEAD:src/data/projects.json > src/data/projects.json
+          fi
+
+      - name: Refresh project metadata
+        id: refresh
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/refresh-projects.mjs
+
+      - name: Open or update snapshot pull request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          branch: automation/project-metadata
+          add-paths: src/data/projects.json
+          commit-message: 'chore: refresh saved project metadata'
+          title: 'Refresh saved CodeAtlas and Drudwyn metadata'
+          body: |
+            Saves validated GitHub descriptions, latest full releases, and repository activity.
+            Failed refreshes retain the previous values and observation times per repository.
+
+            Review the snapshot and approve the Verify workflow runs before merging.
+            Metadata freshness does not establish Built-entry evidence or project CI health.
+
+      - name: Keep refresh failures visible after saving partial success
+        if: ${{ !cancelled() && steps.refresh.outcome == 'failure' }}
+        run: |
+          echo '::error::Project refresh failed for one or more repositories. See the refresh step; successful updates were offered for review.'
+          exit 1

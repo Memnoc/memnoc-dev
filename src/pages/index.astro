@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import AstViewer from '../components/AstViewer.tsx';
+import ProjectMetadata from '../components/ProjectMetadata.astro';
 import { builtEntries, currentWork, repositoryUrl, type BuiltStatus } from '../portfolio';
 
 const builtStatusClass: Record<BuiltStatus, string> = {
@@ -70,7 +71,9 @@ const builtStatusClass: Record<BuiltStatus, string> = {
             >{entry.name}</a>
             <span class={`status ${builtStatusClass[entry.status]}`}>{entry.status}</span>
           </div>
-          <p class="blurb">{entry.blurb}</p>
+          {entry.repository === 'Memnoc/CodeAtlas' ? (
+            <ProjectMetadata repository={entry.repository} />
+          ) : <p class="blurb">{entry.blurb}</p>}
           <div class="lang-tags">
             {entry.tags.map(tag => <span class="tag">{tag}</span>)}
           </div>
@@ -84,6 +87,14 @@ const builtStatusClass: Record<BuiltStatus, string> = {
     <p class="portfolio-intro">
       Work in progress, shown at its last publicly verified maturity and current availability.
     </p>
+    <div class="project-list">
+    <article class="project-card" aria-label="Drudwyn — Current work">
+      <div class="project-header">
+        <a href={repositoryUrl('Memnoc/tmux-drudwyn')} target="_blank" rel="noopener noreferrer" aria-label="View Drudwyn source">Drudwyn</a>
+        <span class="status status-current">Current work</span>
+      </div>
+      <ProjectMetadata repository="Memnoc/tmux-drudwyn" />
+    </article>
     <article class="project-card featured-current-work" aria-label={`${currentWork.name} — ${currentWork.status}`}>
       <div class="project-header">
         <span class="project-name">{currentWork.name}</span>
@@ -102,6 +113,7 @@ const builtStatusClass: Record<BuiltStatus, string> = {
         {currentWork.tags.map(tag => <span class="tag">{tag}</span>)}
       </div>
     </article>
+    </div>
   </section>
 
 </Base>

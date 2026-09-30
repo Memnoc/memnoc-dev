@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 test('visitor can discover and read published writing through navigation and tags', async ({ page }) => {
   await page.goto('/');
 
-  await page.getByRole('navigation').getByRole('link', { name: 'writing' }).click();
+  await page.getByRole('navigation').getByRole('link', { name: 'Writing', exact: true }).click();
   await expect(page).toHaveURL(/\/writing\/?$/);
   await expect(page.getByRole('heading', { level: 2, name: 'Writing' })).toBeVisible();
   await expect(page.getByText('No reviewed writing is published yet.')).toHaveCount(0);

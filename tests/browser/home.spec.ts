@@ -136,7 +136,7 @@ test('manual theme choice persists across navigation and reloads', async ({ page
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'moon');
   await expect(page.getByRole('combobox', { name: 'Theme', exact: true })).toHaveValue('moon');
 
-  await page.getByRole('link', { name: 'about' }).click();
+  await page.getByRole('link', { name: 'About', exact: true }).click();
   await expect(page).toHaveURL(/\/about$/);
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'moon');
 
@@ -214,7 +214,7 @@ test('visitor can choose Rosé Pine and keep it across article navigation and re
   await theme.selectOption({ label: 'Rosé Pine' });
   await expect(page.locator('html')).toHaveCSS('background-color', 'rgb(25, 23, 36)');
 
-  await page.getByRole('navigation').getByRole('link', { name: 'writing' }).click();
+  await page.getByRole('navigation').getByRole('link', { name: 'Writing', exact: true }).click();
   await page.getByRole('link', { name: 'Get your brain to the gym!', exact: true }).click();
   await expect(theme).toHaveValue('rose-pine');
   await expect(page.locator('html')).toHaveCSS('background-color', 'rgb(25, 23, 36)');
