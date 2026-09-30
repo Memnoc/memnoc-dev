@@ -31,9 +31,55 @@ function formatDate(d: Date) {
           ))}
         </div>
       )}
+      {post.data.tldr && (
+        <section class="post-summary" aria-labelledby="post-summary-title">
+          <h2 id="post-summary-title">TL;DR</h2>
+          <p>{post.data.tldr}</p>
+        </section>
+      )}
     </header>
     <div class="post-body">
       <Content />
     </div>
   </article>
 </Base>
+
+<style>
+  .post-header {
+    padding: clamp(1rem, 4vw, 1.75rem);
+    background: color-mix(in srgb, var(--rp-iris) 10%, var(--rp-surface));
+    border: 1px solid var(--rp-hl-med);
+    border-top: 4px solid var(--rp-rose);
+    border-radius: 6px;
+    overflow-wrap: anywhere;
+  }
+
+  .post-title {
+    color: var(--rp-iris-text);
+  }
+
+  .post-meta {
+    color: var(--rp-subtle-text);
+  }
+
+  .post-summary {
+    margin: 1.25rem 0 0;
+    padding: 1rem;
+    background: var(--rp-surface);
+    border-radius: 4px;
+  }
+
+  .post-summary h2 {
+    color: var(--rp-iris-text);
+    margin-bottom: 0.5rem;
+  }
+
+  .post-summary p {
+    color: var(--rp-text);
+  }
+
+  .post-body :global(a) {
+    text-decoration: underline;
+    overflow-wrap: anywhere;
+  }
+</style>
