@@ -1,0 +1,51 @@
+---
+import { savedProjects, type SyncedRepository } from '../project-metadata';
+
+interface Props {
+  repository: SyncedRepository;
+}
+
+const { repository } = Astro.props;
+const saved = savedProjects[repository];
+---
+
+<div class="project-metadata">
+  <p class="blurb">{saved?.description || 'No GitHub description available.'}</p>
+  <p>
+    {saved?.release ? (
+      <a href={saved.release.url} target="_blank" rel="noopener noreferrer">
+        Latest release: {saved.release.tag}
+      </a>
+    ) : saved ? 'No published full release.' : 'Release information unavailable.'}
+  </p>
+  <p>
+    Repository last pushed:{' '}
+    {saved?.pushedAt ? (
+      <time datetime={saved.pushedAt} title={saved.pushedAt}>{saved.pushedAt.slice(0, 10)} (UTC)</time>
+    ) : 'Unavailable'}
+  </p>
+  <p>
+    Metadata checked:{' '}
+    {saved?.checkedAt ? (
+      <time datetime={saved.checkedAt} title={saved.checkedAt}>{saved.checkedAt.slice(0, 10)} (UTC)</time>
+    ) : 'Not yet checked'}
+  </p>
+</div>
+
+<style>
+  .project-metadata {
+    margin-bottom: 0.6rem;
+    overflow-wrap: anywhere;
+  }
+
+  .project-metadata p {
+    margin: 0 0 0.3rem;
+    font-size: 0.78rem;
+    color: var(--rp-subtle-text);
+  }
+
+  .project-metadata .blurb {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+</style>
