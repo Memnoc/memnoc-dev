@@ -41,9 +41,15 @@ tags: [legacy]
 ---
 
 This older article still has its original body.
+
+![First local image](../../assets/blog/brain-gym/cover.jpg)
+
+![Later local image][photo]
+
+[photo]: ../../assets/blog/brain-gym/cover.jpg
 `);
   await run(['build']);
-  await run(['preview', '--host', '127.0.0.1', '--port', '4321']);
+  await run(['preview', '--host', '127.0.0.1', '--port', process.env.PREVIEW_PORT ?? '4321']);
 } finally {
   await rm(root, { recursive: true, force: true });
 }

@@ -39,6 +39,12 @@ jobs:
       - name: Build production site
         run: pnpm build
 
+      - name: Test image import and auditing
+        run: pnpm test:images
+
+      - name: Audit image references and size budgets
+        run: pnpm check:images --built
+
       - name: Install Chromium
         run: pnpm exec playwright install --with-deps chromium
 

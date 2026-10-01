@@ -11,6 +11,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "image:add": "node scripts/import-image.mjs",
+    "check:images": "node scripts/check-images.mjs",
+    "test:images": "node --test tests/images/*.test.mjs",
     "typecheck": "astro sync && tsc --noEmit",
     "test:evidence": "node --test tests/evidence/built-evidence.test.mjs",
     "test:projects": "node --test tests/projects/*.test.mjs",
@@ -31,8 +34,14 @@
     "react-dom": "^19.2.7"
   },
   "devDependencies": {
+    "@astrojs/markdown-remark": "7.2.0",
     "@axe-core/playwright": "4.13.0",
     "@playwright/test": "1.62.0",
-    "@types/node": "^24.13.3"
+    "@types/node": "^24.13.3",
+    "js-yaml": "4.2.0",
+    "parse5": "7.3.0",
+    "remark-parse": "11.0.0",
+    "sharp": "0.34.5",
+    "unified": "11.0.5"
   }
 }

@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { Image } from 'astro:assets';
 import { getPublishedWriting } from '../../writing';
 
 const posts = (await getPublishedWriting())
@@ -14,11 +15,6 @@ function formatDate(d: Date) {
 function readTime(body: string) {
   const words = body.trim().split(/\s+/).length;
   return `${Math.max(1, Math.round(words / 200))} MIN READ`;
-}
-
-function firstImage(body: string): string | null {
-  const m = body.match(/!\[.*?\]\((.+?)\)/);
-  return m ? m[1] : null;
 }
 
 const TAG_TO_LANG: Record<string, string> = {
@@ -87,9 +83,6 @@ function placeholderSvg(tags: string[]): string {
   return `data:image/svg+xml,${encodeURIComponent(svg)}`;
 }
 
-function thumbFor(post: { data: { image?: string; tags: string[]; title: string }; body?: string }): string {
-  return post.data.image ?? firstImage(post.body ?? '') ?? placeholderSvg(post.data.tags);
-}
 ---
 
 <Base title="Writing — Matteo Stara (memnoc)" description="Notes on compilers, systems software, and language implementation.">
@@ -120,7 +113,12 @@ function thumbFor(post: { data: { image?: string; tags: string[]; title: string 
             <p class="post-description">{post.data.description}</p>
           </div>
           <a href={`/writing/${slug(post.id)}`} class="post-thumb-link" aria-label={`Read ${post.data.title}`}>
-            <img src={thumbFor(post)} alt="" class="post-thumb" loading="lazy" />
+            {post.data.image ? (
+              <Image src={post.data.image} alt="" class="post-thumb" width={120} height={80}
+                widths={[120, 240]} sizes="120px" format="webp" fit="cover" layout="fixed" loading="lazy" />
+            ) : (
+              <img src={placeholderSvg(post.data.tags)} alt="" class="post-thumb" width="120" height="80" loading="lazy" />
+            )}
           </a>
         </div>
       </div>

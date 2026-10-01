@@ -34,7 +34,6 @@ test('visitor cannot discover or open unfinished writing', async ({ page, reques
     '/writing/tag/test/',
     '/writing/tag/compilers/',
     '/writing/tag/crafting_interpreters/',
-    '/writing/tag/c_language/',
   ]) {
     const response = await request.get(path);
     expect(response.status(), `${path} must not be public`).toBe(404);

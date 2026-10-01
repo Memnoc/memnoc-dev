@@ -3,6 +3,8 @@ import { defineConfig } from 'astro/config';
 import { execSync } from 'child_process';
 import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
+import { unified } from '@astrojs/markdown-remark';
+import articleImages from './src/lib/rehype-article-images.mjs';
 
 let gitHash = 'unknown';
 try {
@@ -11,6 +13,12 @@ try {
 
 export default defineConfig({
   integrations: [react(), mdx()],
+  image: {
+    layout: 'constrained',
+    breakpoints: [400, 800, 1200, 1600],
+    responsiveStyles: true,
+  },
+  markdown: { processor: unified({ rehypePlugins: [articleImages] }) },
   vite: {
     define: {
       __GIT_HASH__: JSON.stringify(gitHash),
