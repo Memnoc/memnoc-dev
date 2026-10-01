@@ -38,6 +38,12 @@ function formatDate(d: Date) {
         </section>
       )}
     </header>
+    {post.data.disclaimer && (
+      <aside class="post-disclaimer" aria-labelledby="post-disclaimer-label">
+        <p id="post-disclaimer-label" class="disclaimer-label">Disclaimer</p>
+        <p>{post.data.disclaimer}</p>
+      </aside>
+    )}
     <div class="post-body">
       <Content />
     </div>
@@ -78,8 +84,48 @@ function formatDate(d: Date) {
     color: var(--rp-text);
   }
 
-  .post-body :global(a) {
-    text-decoration: underline;
+  .post-disclaimer {
+    margin: 0 0 2rem;
+    padding: 1rem 1.25rem;
+    background: color-mix(in srgb, var(--rp-gold) 8%, var(--rp-surface));
+    border: 1px solid color-mix(in srgb, var(--rp-gold) 35%, var(--rp-hl-med));
+    border-inline-start: 4px solid var(--rp-gold);
+    border-radius: 6px;
+    color: var(--rp-text);
+    font-size: 0.9rem;
+    line-height: 1.65;
     overflow-wrap: anywhere;
+  }
+
+  .disclaimer-label {
+    margin-bottom: 0.3rem;
+    color: var(--rp-gold-text);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .post-body :global(a) {
+    color: var(--rp-foam-text);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, currentColor 55%, transparent);
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.2em;
+    border-radius: 2px;
+    overflow-wrap: anywhere;
+  }
+
+  .post-body :global(a:visited) {
+    color: var(--rp-iris-text);
+  }
+
+  .post-body :global(a:hover),
+  .post-body :global(a:focus-visible) {
+    color: var(--rp-foam-text);
+    background: color-mix(in srgb, var(--rp-foam) 12%, transparent);
+    text-decoration-color: currentColor;
+    text-decoration-thickness: 0.12em;
   }
 </style>

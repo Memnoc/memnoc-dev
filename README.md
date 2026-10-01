@@ -77,6 +77,10 @@ From the repository root, prepare a photo or diagram:
 pnpm image:add ~/Pictures/photo.jpg --post learning-c --name cover
 ```
 
+Replace the source path with your image. `--post` names the asset folder;
+`--name` names the prepared image without its extension. Run the command once
+per image and paste the Markdown it prints into your article.
+
 Use lowercase names separated by hyphens. The command leaves your original
 untouched and writes `src/assets/blog/learning-c/cover.jpg`. It auto-orients,
 strips metadata, and limits width to 1600 pixels without enlarging small images.

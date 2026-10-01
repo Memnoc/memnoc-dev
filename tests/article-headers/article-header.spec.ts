@@ -6,6 +6,7 @@ test('reader can scan the author-written summary alongside article metadata', as
 
   const article = page.getByRole('article');
   const header = article.locator('header');
+  await expect(article.getByRole('complementary', { name: 'Disclaimer', exact: true })).toHaveCount(0);
   await expect(article.getByRole('heading', { level: 1 })).toHaveCount(1);
   await expect(header.getByRole('heading', { level: 1, name: 'Get your brain to the gym!' })).toBeVisible();
   await expect(header.getByText('29 Sept 2026', { exact: true })).toBeVisible();
@@ -29,6 +30,27 @@ test('an older post without summary metadata keeps its body and tags without an 
   await expect(page).toHaveURL(/\/writing\/tag\/legacy\/?$/);
   await expect(page.getByRole('link', { name: 'An article without a summary', exact: true }))
     .toHaveAttribute('href', '/writing/without-summary');
+});
+
+test('reader sees an optional disclaimer and can follow an article reference by keyboard', async ({ page }) => {
+  await page.goto('/writing/without-summary/');
+
+  const note = page.getByRole('complementary', { name: 'Disclaimer', exact: true });
+  await expect(note).toBeVisible();
+  await expect(note).toContainText('This post was not generated using an LLM.');
+  await expect(note).not.toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
+
+  const reference = page.getByRole('link', { name: 'An external reference', exact: true });
+  await expect(reference).toHaveCSS('text-decoration-line', 'underline');
+  await reference.focus();
+  await expect(reference).toBeFocused();
+  await expect(reference).not.toHaveCSS('outline-style', 'none');
+  await page.route('https://example.com/reference', route => route.fulfill({
+    contentType: 'text/html',
+    body: '<title>External reference</title><p>Reference opened.</p>',
+  }));
+  await reference.press('Enter');
+  await expect(page).toHaveURL('https://example.com/reference');
 });
 
 for (const theme of ['dawn', 'moon', 'rose-pine']) {
