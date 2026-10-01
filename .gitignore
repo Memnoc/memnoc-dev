@@ -1,5 +1,7 @@
 # build output
 dist/
+# Byte-preserved migration originals: local archive, never deploy or commit.
+.local/image-originals/
 # generated types
 .astro/
 

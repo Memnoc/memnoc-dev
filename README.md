@@ -35,15 +35,17 @@ pnpm install --frozen-lockfile        # install without changing pnpm-lock.yaml
 pnpm typecheck                        # typecheck TypeScript
 pnpm test:evidence                    # offline evidence-verifier tests
 pnpm test:projects                    # offline project-refresh tests
+pnpm test:images                      # image import and audit tests
 pnpm build                            # production output → dist/
+pnpm check:images --built              # missing references + advisory size report
 pnpm exec playwright install chromium # one-time local browser install
 pnpm test:browser                     # production browser + accessibility suite
 pnpm test:projects:browser            # isolated offline build + project fallbacks
 pnpm test:accessibility               # focused accessibility/assembled-quality checks
 ```
 
-Normal `Verify` CI runs typechecking, the offline evidence and project-refresh tests,
-the production build, and both browser suites. The verifier
+Normal `Verify` CI runs typechecking, the offline evidence, project-refresh and image tests,
+the production build, image audit, and both browser suites. The verifier
 tests use controlled HTTP responses and a local source archive; they never
 contact linked repositories.
 
@@ -66,6 +68,82 @@ not remove `noindex` or satisfy the launch gate by itself.
 The browser suite always runs against Astro's production preview server. Run
 `pnpm build` first so `dist/` reflects the source under test. For day-to-day
 development, `pnpm dev` starts the HMR server at `localhost:4321`.
+
+## Publishing images
+
+From the repository root, prepare a photo or diagram:
+
+```sh
+pnpm image:add ~/Pictures/photo.jpg --post learning-c --name cover
+```
+
+Replace the source path with your image. `--post` names the asset folder;
+`--name` names the prepared image without its extension. Run the command once
+per image and paste the Markdown it prints into your article.
+
+Use lowercase names separated by hyphens. The command leaves your original
+untouched and writes `src/assets/blog/learning-c/cover.jpg`. It auto-orients,
+strips metadata, and limits width to 1600 pixels without enlarging small images.
+Static JPEG, PNG, and WebP are supported. Use PNG for diagrams and transparency;
+PNG encoding is lossless after resizing. Existing destinations are never overwritten.
+Keep your originals in your normal photo/document backup, outside the repository.
+
+Paste the printed Markdown into a post under `src/content/blog/`, replacing the
+example alt text with a useful description:
+
+```md
+![A description of the photograph](../../assets/blog/learning-c/cover.jpg)
+```
+
+To use it as the Writing thumbnail, add the printed field inside the post's
+existing frontmatter:
+
+```yaml
+image: "../../assets/blog/learning-c/cover.jpg"
+```
+
+This field is optional and validated as a local image. Without it, Writing uses
+the existing themed placeholder, even when the body contains images. Thumbnail
+selection never depends on the first Markdown image. Keep photo attribution in
+the article text. Use `[text](url)` for links and `![description](path)` for images.
+
+Astro builds WebP article variants at 400, 800, 1200, and 1600 pixels, capped by
+source width. The browser chooses one for the column width and display density.
+The first local body image loads eagerly; later images load lazily. Dimensions
+reserve their space before downloading. Writing uses cropped 120/240-pixel
+variants. Generated variants live in ignored `dist/`, not Git; commit the prepared
+source asset alongside the Markdown. An image in `public/` bypasses this pipeline.
+
+While writing, run `pnpm check:images --source-only`. Before publishing, run
+`pnpm build && pnpm check:images --built` to audit the fresh output too. Missing
+local references fail the audit. Size warnings are advisory: 500 KB or over
+1600 pixels wide for a source, 30 KB per thumbnail variant, 300 KB per article
+variant. External images are reported without fetching. The command without
+flags also reads the last build if present; it cannot determine whether it is
+fresh. `--json` produces a machine-readable report. CI runs these checks after
+building. Video, PDFs, and other downloads need separate hosting or size review;
+they are not converted by this image pipeline.
+
+Measured migration on 2026-10-01 (decimal KB; article sizes show an 800px variant):
+
+| Image | Original | Prepared source | Article WebP | Thumbnail 120 / 240 |
+| --- | ---: | ---: | ---: | ---: |
+| Brain photo | 1,064 KB | 63 KB | 8.5 KB | 0.5 / 1.6 KB |
+| C photo | 609 KB | 59 KB | 10.8 KB | 1.4 / 3.0 KB |
+| Study diagram | 702 KB | 639 KB | 111.7 KB | — |
+
+The diagram deliberately exceeds the source budget to retain detail; its largest
+delivered variant is 271.7 KB, within the article budget. The three migration
+originals are byte-preserved in ignored `.local/image-originals/2026-10-01/` on
+this machine. Back that directory up separately; Git and deployment do not store
+it. This migration does not remove old image blobs from Git history.
+
+For transparent diagrams, check contrast in every theme before publishing.
+The current study diagram has pale labels designed for a dark background; its
+existing Dawn contrast needs an authoring change, independent of compression.
+
+Image processing uses [Astro's native image support](https://docs.astro.build/en/guides/images/)
+and [Sharp's output encoders](https://sharp.pixelplumbing.com/api-output/).
 
 ## Saved project metadata
 
@@ -125,6 +203,7 @@ and [create-pull-request](https://github.com/peter-evans/create-pull-request).
 src/
   components/       # React island (standalone Lox expression parser)
   content/blog/     # Markdown posts — typed via Zod schema
+  assets/blog/      # Prepared image sources; generated variants stay in dist/
   content.config.ts # Content collection schema
   layouts/Base.astro
   pages/            # File-based routing
