@@ -6,12 +6,12 @@
       "tag": "v0.1.8",
       "url": "https://github.com/Memnoc/CodeAtlas/releases/tag/v0.1.8"
     },
-    "checkedAt": "2026-09-30T09:23:25.443Z"
+    "checkedAt": "2026-10-03T12:43:18.791Z"
   },
   "Memnoc/tmux-drudwyn": {
     "description": "A tmux plugin for navigating coding agents, tracking work trees and workspaces.",
     "pushedAt": "2026-09-09T12:08:54Z",
     "release": null,
-    "checkedAt": "2026-09-30T09:23:25.637Z"
+    "checkedAt": "2026-10-03T12:43:19.200Z"
   }
 }
