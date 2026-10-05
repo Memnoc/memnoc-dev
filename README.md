@@ -139,8 +139,8 @@ this machine. Back that directory up separately; Git and deployment do not store
 it. This migration does not remove old image blobs from Git history.
 
 For transparent diagrams, check contrast in every theme before publishing.
-The current study diagram has pale labels designed for a dark background; its
-existing Dawn contrast needs an authoring change, independent of compression.
+The study diagram includes an opaque dark background so its pale labels remain
+readable in Dawn as well as the dark themes.
 
 Image processing uses [Astro's native image support](https://docs.astro.build/en/guides/images/)
 and [Sharp's output encoders](https://sharp.pixelplumbing.com/api-output/).
