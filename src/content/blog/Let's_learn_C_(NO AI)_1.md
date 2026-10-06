@@ -11,8 +11,7 @@ draft: false
 
 ## A little history of C
 
-![A C official logo held by a hand.](../../assets/blog/learning-c/cover.jpg)
-Photo by [RealToughCandy.com](https://www.pexels.com/photo/woman-hand-holding-logotype-11035472/)
+![Programming in C course banner: syntax, patterns, best practices and manual code writing, no AI.](../../assets/blog/learning-c/programming-in-c-banner.png)
 
 The C programming language was developed between 1969 and 1973, with its most significant development in 1972. The first K&R book appeared in 1978. Distinguish editions of the book from revisions of the language:
 When _The C Programming Language_, first edition, debuted in 1978, it was, without a doubt, something quite revolutionary. Assembly, Pascal, Fortran, and B were among the languages available at the time, and C had a lot of niceties and innovative ideas in comparison. I mention this because I think it is interesting to consider the perspective of the people who first adopted the language.
