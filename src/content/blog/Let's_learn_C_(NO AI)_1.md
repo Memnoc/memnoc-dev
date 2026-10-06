@@ -5,7 +5,7 @@ description: "Lesson 1 of the C course: a little history, Hello World, compilati
 tldr: "Let's learn the C programming language without AI doing all the work for us."
 disclaimer: "This post was not generated using an LLM."
 tags: [learning, c_language, no_ai]
-image: "../../assets/blog/learning-c/cover.jpg"
+image: "../../assets/blog/learning-c/programming-in-c-banner.png"
 draft: false
 ---
 
