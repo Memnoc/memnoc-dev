@@ -781,12 +781,14 @@ a.post-tag:hover {
 }
 
 .post-body :is(h1, h2, h3, h4, h5, h6) {
+  --heading-accent: var(--rp-iris);
+  --heading-text: var(--rp-iris-text);
   font-weight: 600;
   text-transform: none;
   letter-spacing: 0;
-  color: var(--rp-iris-text);
-  border-inline-start: 3px solid var(--rp-iris);
-  background: linear-gradient(to right, color-mix(in srgb, var(--rp-iris) 8%, transparent), transparent);
+  color: var(--heading-text);
+  border-inline-start: 3px solid var(--heading-accent);
+  background: linear-gradient(to right, color-mix(in srgb, var(--heading-accent) 8%, transparent), transparent);
   padding: 0.35rem 0.75rem;
   line-height: 1.45;
   overflow-wrap: anywhere;
@@ -804,16 +806,25 @@ a.post-tag:hover {
 }
 
 .post-body h2 {
+  --heading-accent: var(--rp-foam);
+  --heading-text: var(--rp-foam-text);
   font-size: 1.1rem;
 }
 
 .post-body h3 {
+  --heading-accent: var(--rp-gold);
+  --heading-text: var(--rp-gold-text);
   font-size: 0.95rem;
 }
 
 .post-body h4 { font-size: 0.9rem; }
 .post-body h5 { font-size: 0.875rem; }
 .post-body h6 { font-size: 0.85rem; }
+
+.post-body strong {
+  color: color-mix(in srgb, var(--rp-love-text) 80%, var(--rp-text));
+  font-weight: 700;
+}
 
 .post-body blockquote {
   border-left: 3px solid var(--rp-hl-high);
