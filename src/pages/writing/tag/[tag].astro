@@ -1,6 +1,7 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import { getPublishedWriting } from '../../../writing';
+import CourseLabel from '../../../components/CourseLabel.astro';
 
 export async function getStaticPaths() {
   const posts = await getPublishedWriting();
@@ -33,6 +34,7 @@ function formatDate(d: Date) {
   <div class="post-list">
     {posts.map(post => (
       <div class="post-item">
+        <CourseLabel course={post.data.course} />
         <div class="post-item-header">
           <a href={`/writing/${slug(post.id)}`}>{post.data.title}</a>
           <span class="post-date">{formatDate(post.data.date)}</span>

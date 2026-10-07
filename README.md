@@ -197,6 +197,51 @@ pnpm exec playwright test --config tests/article-headers/playwright.config.ts
 
 These isolated browser fixtures never enter the deployable site.
 
+## Compact sources
+
+Keep bibliography text and links visible in a smaller section with tighter
+spacing. Use the same quoted-block syntax as exercises, with a blank quoted
+line after the marker:
+
+```md
+> [!SOURCES]
+>
+> **Books**
+>
+> - Author, *Book title*, edition and year. [Publisher](https://example.com/book).
+>
+> **Documentation**
+>
+> - [Reference title](https://example.com/reference).
+```
+
+The source block ends at the first unquoted content. Leave an unquoted blank
+line before continuing the article with its normal text size. Sources use a
+subdued Rosé Pine accent and remain visible; no disclosure control is added.
+
+## Course lessons
+
+Add optional course metadata inside a post's existing frontmatter:
+
+```yaml
+course:
+  name: C course
+  lesson: 0
+```
+
+Use `0` for **Intro**, `1` for **Lesson 1**, and subsequent whole numbers for
+later lessons. The course name groups posts, so use exactly the same name for
+every lesson in that course. To create another course, use a different name.
+Keep each published lesson number unique within its course. Negative numbers,
+fractions, and empty names fail schema validation; duplicate published lesson
+numbers produce an error naming the conflicting posts.
+
+The course name and numeric label appear above the article title and in Writing
+and tag lists. Each course article has a row of links in numeric order, with the
+current lesson highlighted. Only published posts from that course are included;
+drafts do not appear. Existing article titles, URLs, and Writing's date ordering
+stay the same. Omit `course` entirely for a standalone article.
+
 ## Saved project metadata
 
 CodeAtlas and Drudwyn read `src/data/projects.json` at build time. There are no

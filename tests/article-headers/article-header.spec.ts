@@ -57,7 +57,7 @@ for (const theme of ['dawn', 'moon', 'rose-pine']) {
   for (const width of [320, 1280]) {
     test(`${theme} article headers are distinct, accessible, and fit at ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 900 });
-      for (const slug of ['aoc-16_0', 'without-summary', 'exercises']) {
+      for (const slug of ['aoc-16_0', 'without-summary', 'exercises', 'lets_learn_c_no-ai_0', 'lets_learn_c_no-ai_1']) {
         await page.goto(`/writing/${slug}/`);
         await page.getByRole('combobox', { name: 'Theme', exact: true }).selectOption(theme);
         await expect(page.locator('html')).toHaveAttribute('data-theme', theme);

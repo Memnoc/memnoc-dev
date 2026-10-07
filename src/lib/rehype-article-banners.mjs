@@ -2,6 +2,8 @@ function element(tagName, properties, children) {
   return { type: 'element', tagName, properties, children };
 }
 
+const labels = { exercise: 'Exercise', solution: 'Solution', sources: 'Sources' };
+
 // Markdown blockquotes keep code, links, lists, and images in the normal pipeline.
 export default function articleBanners() {
   return (tree) => {
@@ -14,18 +16,18 @@ export default function articleBanners() {
       const marker = first.children[0];
       if (marker.type !== 'text') return;
       // The marker and optional plain-text title occupy their own paragraph.
-      const match = /^\[!(EXERCISE|SOLUTION)\](?:[ \t]+([^\n]+))?[ \t]*$/.exec(marker.value);
+      const match = /^\[!(EXERCISE|SOLUTION|SOURCES)\](?:[ \t]+([^\n]+))?[ \t]*$/.exec(marker.value);
       if (!match) return;
 
       const kind = match[1].toLowerCase();
-      const label = kind === 'exercise' ? 'Exercise' : 'Solution';
+      const label = labels[kind];
       const title = match[2]?.trim();
       const name = title ? `${label}: ${title}` : label;
       const body = node.children.filter(child => child !== first);
       node.tagName = kind === 'solution' ? 'details' : 'section';
       node.properties = {
         className: ['article-banner', `article-${kind}`],
-        ...(kind === 'exercise' ? { ariaLabel: name } : {}),
+        ...(kind !== 'solution' ? { ariaLabel: name } : {}),
       };
       node.children = [
         element(kind === 'solution' ? 'summary' : 'p', { className: ['article-banner-label'] }, [

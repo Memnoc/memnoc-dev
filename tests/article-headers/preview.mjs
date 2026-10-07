@@ -34,6 +34,26 @@ try {
   }
   await symlink(resolve('node_modules'), join(root, 'node_modules'), 'dir');
   await cp('tests/article-headers/fixtures/exercises.md', join(root, 'src/content/blog/exercises.md'));
+  for (const [id, name, lesson, draft] of [
+    ['course-ten', 'Fixture course', 10, false],
+    ['course-two', 'Fixture course', 2, false],
+    ['course-draft', 'Fixture course', 3, true],
+    ['course-other', 'Another course', 1, false],
+    ['c-draft', 'C course', 2, true],
+  ]) {
+    await writeFile(join(root, `src/content/blog/${id}.md`), `---
+title: "${id}"
+date: 2026-10-07
+description: "Course ordering fixture."
+course:
+  name: "${name}"
+  lesson: ${lesson}
+draft: ${draft}
+---
+
+A course fixture.
+`);
+  }
   await writeFile(join(root, 'src/content/blog/without-summary.md'), `---
 title: "An article without a summary"
 date: 2026-09-29

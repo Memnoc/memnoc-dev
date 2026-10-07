@@ -2,16 +2,23 @@
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { getPublishedWriting } from '../../writing';
+import CourseLabel from '../../components/CourseLabel.astro';
+import CourseNavigation from '../../components/CourseNavigation.astro';
 
 export async function getStaticPaths() {
   const posts = await getPublishedWriting();
   return posts.map(post => ({
     params: { slug: post.id.replace(/\.md$/, '') },
-    props: { post },
+    props: {
+      post,
+      lessons: post.data.course ? posts
+        .filter(candidate => candidate.data.course?.name === post.data.course!.name)
+        .sort((a, b) => a.data.course!.lesson - b.data.course!.lesson) : [],
+    },
   }));
 }
 
-const { post } = Astro.props;
+const { post, lessons } = Astro.props;
 const { Content } = await render(post);
 
 function formatDate(d: Date) {
@@ -22,6 +29,7 @@ function formatDate(d: Date) {
 <Base title={`${post.data.title} — Matteo Stara`} description={post.data.description}>
   <article class="post">
     <header class="post-header article-banner">
+      <CourseLabel course={post.data.course} />
       <h1 class="post-title">{post.data.title}</h1>
       <p class="post-meta">{formatDate(post.data.date)}</p>
       {post.data.tags.length > 0 && (
@@ -36,6 +44,9 @@ function formatDate(d: Date) {
           <h2 id="post-summary-title">TL;DR</h2>
           <p>{post.data.tldr}</p>
         </section>
+      )}
+      {post.data.course && (
+        <CourseNavigation name={post.data.course.name} lessons={lessons} currentId={post.id} />
       )}
     </header>
     {post.data.disclaimer && (

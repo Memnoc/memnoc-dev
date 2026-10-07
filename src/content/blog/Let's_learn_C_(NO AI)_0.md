@@ -5,6 +5,9 @@ description: "First article of a longer series to teach the C language going thr
 tldr: "Let's learn the C programming language without AI doing all the work for us."
 disclaimer: "This post was not generated using an LLM."
 tags: [learning, c_language, no_ai]
+course:
+  name: C course
+  lesson: 0
 image: "../../assets/blog/learning-c/programming-in-c-banner.png"
 draft: false
 ---
@@ -23,9 +26,9 @@ Now that I got this out of the way (and my guts), let's talk about this course a
 
 So, knowing my own limit, this series will be a "following this or that book" series, in which every topic is guided by the hands of those that shaped the history of this rich language. I feel like this is a much better approach than me winging my way through what I think we should learn. And yes, let's start saying we right away, as in teaching, I will also be learning as much as you do.
 
-## Sources
-
-I have several books in C, but the ones I think are the most sound are of course the aforementioned [K&R](https://en.wikipedia.org/wiki/The_C_Programming_Language), and [C Programming - a modern Approach](https://www.amazon.co.uk/C-Programming-KN-King/dp/0393979504) by K. N. King. I am also part of a great community of learners over at [Esadecimale](https://esadecimale.it/) and here is the dedicated [Youtube channel](https://www.youtube.com/@esadecimale). Of course, there are more and more resources, and more and more youtuber or influencer you could follow, but heed my warning on this topic: try to stop watching, and prioritize reading! Yes, reading and watching are [very different skills](https://oxfordlearning.com/screen-vs-paper-which-one-boosts-reading-comprehension/), and follow significantly different pathways in your brain.
+> [!SOURCES]
+>
+> I have several books in C, but the ones I think are the most sound are of course the aforementioned [K&R](https://en.wikipedia.org/wiki/The_C_Programming_Language), and [C Programming - a modern Approach](https://www.amazon.co.uk/C-Programming-KN-King/dp/0393979504) by K. N. King. I am also part of a great community of learners over at [Esadecimale](https://esadecimale.it/) and here is the dedicated [Youtube channel](https://www.youtube.com/@esadecimale). Of course, there are more and more resources, and more and more youtuber or influencer you could follow, but heed my warning on this topic: try to stop watching, and prioritize reading! Yes, reading and watching are [very different skills](https://oxfordlearning.com/screen-vs-paper-which-one-boosts-reading-comprehension/), and follow significantly different pathways in your brain.
 
 ## Stop watching, start learning
 

@@ -1,0 +1,63 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { lessonLabel } from '../writing';
+
+interface Props {
+  name: string;
+  lessons: CollectionEntry<'blog'>[];
+  currentId: string;
+}
+
+const { name, lessons, currentId } = Astro.props;
+---
+
+<nav class="course-navigation" aria-label={`${name} lessons`}>
+  <ol>
+    {lessons.map(lesson => (
+      <li>
+        <a href={`/writing/${lesson.id.replace(/\.md$/, '')}`}
+          aria-current={lesson.id === currentId ? 'page' : undefined}>
+          {lessonLabel(lesson.data.course!.lesson)}
+        </a>
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<style>
+  .course-navigation {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--rp-hl-med);
+    font-size: 0.75rem;
+  }
+
+  ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li { margin: 0; max-width: 100%; }
+
+  a {
+    display: block;
+    padding: 0.2rem 0.45rem;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: var(--rp-subtle-text);
+    overflow-wrap: anywhere;
+  }
+
+  a:hover { color: var(--rp-iris-text); }
+
+  a[aria-current="page"] {
+    border-color: var(--rp-iris);
+    color: var(--rp-iris-text);
+    font-weight: 700;
+    background: color-mix(in srgb, var(--rp-iris) 8%, transparent);
+  }
+</style>

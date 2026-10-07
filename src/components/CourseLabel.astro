@@ -1,0 +1,23 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { lessonLabel } from '../writing';
+
+interface Props {
+  course: CollectionEntry<'blog'>['data']['course'];
+}
+
+const { course } = Astro.props;
+---
+
+{course && <p class="post-course">{course.name} · {lessonLabel(course.lesson)}</p>}
+
+<style>
+  .post-course {
+    color: var(--rp-iris-text);
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 0.4rem;
+    overflow-wrap: anywhere;
+  }
+</style>

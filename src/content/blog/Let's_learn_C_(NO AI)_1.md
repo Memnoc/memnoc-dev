@@ -5,6 +5,9 @@ description: "Lesson 1 of the C course: a little history, Hello World, compilati
 tldr: "Let's learn the C programming language without AI doing all the work for us."
 disclaimer: "This post was not generated using an LLM."
 tags: [learning, c_language, no_ai]
+course:
+  name: C course
+  lesson: 1
 image: "../../assets/blog/learning-c/programming-in-c-banner.png"
 draft: false
 ---
@@ -159,6 +162,17 @@ To sum up, the compiler needs to know everything about your code before it attem
 The duality of C is a fundamental part of the language. Generally speaking, you will find source files containing implementations and headers commonly sharing declarations, types, and macros.
 More on this topic: [GCC's explanation of headers](https://gcc.gnu.org/onlinedocs/cpp/Header-Files.html).
 
+> [!EXERCISE] 1 — Make Hello World your own
+>
+> Put this lesson into practice before moving on:
+>
+> 1. Without copying the example, write a `hello_world.c` program that prints `Hello, World!` followed by a newline.
+> 2. Compile it with `gcc hello_world.c -o hello_world`, then run `./hello_world` and check the output.
+> 3. Change the greeting to include your name. Compile and run the program again to see the change.
+> 4. Run `gcc -S hello_world.c` and open `hello_world.s`. Find your greeting in the assembly output and explain what the `-S` flag changed about the compiler's output.
+>
+> *Exercise prompt drafted with Codex for author review.*
+
 ### What did we learn?
 
 We have covered some ground in this first lesson:
@@ -183,40 +197,40 @@ See you at the next one!
 
 ---
 
-### Sources used in this article
-
-**The book**
-
-- Kernighan, B. W. and Ritchie, D. M., _The C Programming Language_, 2nd edition (ANSI C), Prentice Hall, 1988. [Publisher's page](https://www.pearson.com/en-us/subject-catalog/p/c-programming-language/P200000003426) and [Kernighan's companion page](https://www.cs.princeton.edu/~bwk/cbook.html).
-
-**History of C and ANSI C**
-
-- Dennis Ritchie, [_The Development of the C Language_](https://cm-bell-labs.github.io/who/dmr/chist.html), the primary account of how and why C came to be, including the road to the ANSI standard.
-- ISO/IEC JTC1/SC22/WG14, [the C standards committee](https://www.open-std.org/jtc1/sc22/wg14/), home of the official drafts, including the C89/C90 "ANSI C" lineage.
-- GCC documentation, [Language Standards Supported by GCC](https://gcc.gnu.org/onlinedocs/gcc/Standards.html), a concise list of the C revisions (C89, C99, C11, C17, C23) and how to select them.
-
-**C in the real world**
-
-- NASA JPL, [_Mars Exploration Rover Surface Operations_](https://robotics.jpl.nasa.gov/media/documents/casah_aero_2018b.pdf), on the rover flight software.
-- Linux Foundation, [Anniversary of the first Linux kernel release](https://www.linuxfoundation.org/blog/blog/anniversary-of-first-linux-kernel-release-a-look-at-collaborative-value).
-- Linux kernel documentation, [Programming Language](https://docs.kernel.org/next/process/programming-language.html), which spells out the C dialect the kernel uses and its Rust support.
-- [Redis](https://redis.io/) and its [source code on GitHub](https://github.com/redis/redis), a production-grade in-memory database written in C and a great example of real-world C to read.
-
-**GCC and compilation**
-
-- GNU Project, [A Brief History of GCC](https://gcc.gnu.org/wiki/History), on Richard Stallman and the origins of the compiler.
-- GCC documentation, [Options Controlling the Kind of Output](https://gcc.gnu.org/onlinedocs/gcc/Overall-Options.html), where `-o`, `-S`, `-c` and `-E` are defined.
-- GCC documentation, [Options That Control Optimization](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html), for `-O0` through `-O3`, `-Os` and friends.
-- GCC documentation, [An Introduction to GCC](https://gcc.gnu.org/onlinedocs/gcc/Invoking-GCC.html), the top of the "Invoking GCC" chapter for everything else.
-
-**Headers, the preprocessor and the standard library**
-
-- GNU C Preprocessor manual, [Header Files](https://gcc.gnu.org/onlinedocs/cpp/Header-Files.html).
-- GNU C Preprocessor manual, [Overview](https://gcc.gnu.org/onlinedocs/cpp/Overview.html), on what the preprocessor does before compilation.
-- GNU C Library manual, [Introduction](https://sourceware.org/glibc/manual/latest/html_node/Introduction.html), for the standard library that `stdio.h` belongs to.
-- Linux man-pages, [printf(3)](https://man7.org/linux/man-pages/man3/printf.3.html), the prototype we copied with `man printf`.
-- cppreference, [C standard library headers](https://en.cppreference.com/w/c/header), a compact map of every header in the standard library.
-
-**Video**
-
-- Salvatore Sanfilippo (antirez, creator of Redis), [_Impariamo il C: lezione 1_](https://www.youtube.com/watch?v=HjXBXBgfKyk), the first lesson of his C course on YouTube (in Italian).
+> [!SOURCES]
+>
+> **The book**
+>
+> - Kernighan, B. W. and Ritchie, D. M., _The C Programming Language_, 2nd edition (ANSI C), Prentice Hall, 1988. [Publisher's page](https://www.pearson.com/en-us/subject-catalog/p/c-programming-language/P200000003426) and [Kernighan's companion page](https://www.cs.princeton.edu/~bwk/cbook.html).
+>
+> **History of C and ANSI C**
+>
+> - Dennis Ritchie, [_The Development of the C Language_](https://cm-bell-labs.github.io/who/dmr/chist.html), the primary account of how and why C came to be, including the road to the ANSI standard.
+> - ISO/IEC JTC1/SC22/WG14, [the C standards committee](https://www.open-std.org/jtc1/sc22/wg14/), home of the official drafts, including the C89/C90 "ANSI C" lineage.
+> - GCC documentation, [Language Standards Supported by GCC](https://gcc.gnu.org/onlinedocs/gcc/Standards.html), a concise list of the C revisions (C89, C99, C11, C17, C23) and how to select them.
+>
+> **C in the real world**
+>
+> - NASA JPL, [_Mars Exploration Rover Surface Operations_](https://robotics.jpl.nasa.gov/media/documents/casah_aero_2018b.pdf), on the rover flight software.
+> - Linux Foundation, [Anniversary of the first Linux kernel release](https://www.linuxfoundation.org/blog/blog/anniversary-of-first-linux-kernel-release-a-look-at-collaborative-value).
+> - Linux kernel documentation, [Programming Language](https://docs.kernel.org/next/process/programming-language.html), which spells out the C dialect the kernel uses and its Rust support.
+> - [Redis](https://redis.io/) and its [source code on GitHub](https://github.com/redis/redis), a production-grade in-memory database written in C and a great example of real-world C to read.
+>
+> **GCC and compilation**
+>
+> - GNU Project, [A Brief History of GCC](https://gcc.gnu.org/wiki/History), on Richard Stallman and the origins of the compiler.
+> - GCC documentation, [Options Controlling the Kind of Output](https://gcc.gnu.org/onlinedocs/gcc/Overall-Options.html), where `-o`, `-S`, `-c` and `-E` are defined.
+> - GCC documentation, [Options That Control Optimization](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html), for `-O0` through `-O3`, `-Os` and friends.
+> - GCC documentation, [An Introduction to GCC](https://gcc.gnu.org/onlinedocs/gcc/Invoking-GCC.html), the top of the "Invoking GCC" chapter for everything else.
+>
+> **Headers, the preprocessor and the standard library**
+>
+> - GNU C Preprocessor manual, [Header Files](https://gcc.gnu.org/onlinedocs/cpp/Header-Files.html).
+> - GNU C Preprocessor manual, [Overview](https://gcc.gnu.org/onlinedocs/cpp/Overview.html), on what the preprocessor does before compilation.
+> - GNU C Library manual, [Introduction](https://sourceware.org/glibc/manual/latest/html_node/Introduction.html), for the standard library that `stdio.h` belongs to.
+> - Linux man-pages, [printf(3)](https://man7.org/linux/man-pages/man3/printf.3.html), the prototype we copied with `man printf`.
+> - cppreference, [C standard library headers](https://en.cppreference.com/w/c/header), a compact map of every header in the standard library.
+>
+> **Video**
+>
+> - Salvatore Sanfilippo (antirez, creator of Redis), [_Impariamo il C: lezione 1_](https://www.youtube.com/watch?v=HjXBXBgfKyk), the first lesson of his C course on YouTube (in Italian).

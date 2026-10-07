@@ -888,6 +888,29 @@ a.post-tag:hover {
   overflow-wrap: normal;
 }
 
+.article-sources {
+  --banner-accent: var(--rp-muted);
+  --banner-label: var(--rp-subtle-text);
+  margin: 1.5rem 0;
+  padding: 0.75rem 1rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.article-sources p,
+.article-sources ul,
+.article-sources ol {
+  margin-bottom: 0.5rem;
+}
+
+.article-sources li {
+  margin-bottom: 0.2rem;
+}
+
+.article-sources .article-banner-body > :last-child {
+  margin-bottom: 0;
+}
+
 /* ——— About page ——— */
 .about-content {
   font-size: 0.975rem;
