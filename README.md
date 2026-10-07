@@ -197,6 +197,28 @@ pnpm exec playwright test --config tests/article-headers/playwright.config.ts
 
 These isolated browser fixtures never enter the deployable site.
 
+## Lesson source code
+
+Add a GitHub URL to a post's existing frontmatter:
+
+```yaml
+sourceCode: "https://github.com/Memnoc/C_course/tree/main/lesson_1"
+```
+
+This adds a compact source-code banner immediately below the article header,
+using Rosé Pine's love accent and a code-bracket icon. Repository roots, lesson
+folders, and individual files are supported. Use an HTTPS `github.com` URL with
+an owner and repository; other hosts and URLs containing credentials are rejected.
+The banner is omitted when the field is absent. Links are rendered locally, so
+builds do not depend on GitHub availability. Choose the intended link explicitly
+for each new lesson; the Intro currently links to the course repository root.
+
+Banner icons supplement their text labels: code brackets for source code, a
+pencil for exercises, a lightbulb for solutions, an open book for sources, and
+an information symbol for disclaimers. The icons follow the theme, require no
+downloads or JavaScript, and are hidden from screen readers to avoid redundant
+announcements. Solutions keep their native expand/collapse arrow.
+
 ## Compact sources
 
 Keep bibliography text and links visible in a smaller section with tighter

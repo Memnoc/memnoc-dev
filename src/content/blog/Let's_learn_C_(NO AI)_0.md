@@ -3,6 +3,7 @@ title: "Let's learn C (NO AI)"
 date: 2026-09-29
 description: "First article of a longer series to teach the C language going through books, examples and research, all done without an LLM writing our code"
 tldr: "Let's learn the C programming language without AI doing all the work for us."
+sourceCode: "https://github.com/Memnoc/C_course"
 disclaimer: "This post was not generated using an LLM."
 tags: [learning, c_language, no_ai]
 course:

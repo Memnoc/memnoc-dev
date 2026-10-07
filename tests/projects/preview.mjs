@@ -25,6 +25,7 @@ function run(args, expectedCode = 0, command = process.execPath) {
     let output = '';
     const commandArgs = command === process.execPath ? ['--import', preload, ...args] : args;
     child = spawn(command, commandArgs, {
+      cwd: root,
       env: { ...process.env, PROJECT_REQUEST_LOG: requestLog, ASTRO_TELEMETRY_DISABLED: '1' },
       stdio: ['ignore', 'pipe', 'pipe'],
     });
@@ -41,7 +42,7 @@ function run(args, expectedCode = 0, command = process.execPath) {
 }
 
 try {
-  for (const path of ['src', 'public', 'tests', 'playwright.config.ts', 'astro.config.mjs', 'package.json', 'tsconfig.json']) {
+  for (const path of ['src', 'public', 'scripts', 'tests', 'playwright.config.ts', 'astro.config.mjs', 'package.json', 'tsconfig.json']) {
     await cp(path, join(root, path), { recursive: true });
   }
   await symlink(resolve('node_modules'), join(root, 'node_modules'), 'dir');

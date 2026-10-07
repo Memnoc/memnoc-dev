@@ -1,0 +1,33 @@
+---
+import BannerIcon from './BannerIcon.astro';
+
+interface Props {
+  url: string;
+}
+
+const { url } = Astro.props;
+---
+
+<aside class="source-code article-banner" aria-labelledby="source-code-label">
+  <p id="source-code-label" class="article-banner-label"><BannerIcon kind="code" />Source code</p>
+  <p><a href={url}>View source on GitHub</a></p>
+</aside>
+
+<style>
+  .source-code {
+    --banner-accent: var(--rp-love);
+    --banner-label: color-mix(in srgb, var(--rp-love-text) 80%, var(--rp-text));
+    margin-bottom: 1.5rem;
+  }
+
+  a {
+    color: var(--banner-label);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    border-radius: 2px;
+  }
+
+  a:hover {
+    text-decoration-thickness: 0.12em;
+  }
+</style>

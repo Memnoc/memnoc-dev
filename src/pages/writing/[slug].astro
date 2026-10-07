@@ -4,6 +4,8 @@ import Base from '../../layouts/Base.astro';
 import { getPublishedWriting } from '../../writing';
 import CourseLabel from '../../components/CourseLabel.astro';
 import CourseNavigation from '../../components/CourseNavigation.astro';
+import SourceCode from '../../components/SourceCode.astro';
+import BannerIcon from '../../components/BannerIcon.astro';
 
 export async function getStaticPaths() {
   const posts = await getPublishedWriting();
@@ -26,7 +28,7 @@ function formatDate(d: Date) {
 }
 ---
 
-<Base title={`${post.data.title} — Matteo Stara`} description={post.data.description}>
+<Base title={`${post.data.title} - Matteo Stara`} description={post.data.description}>
   <article class="post">
     <header class="post-header article-banner">
       <CourseLabel course={post.data.course} />
@@ -49,9 +51,10 @@ function formatDate(d: Date) {
         <CourseNavigation name={post.data.course.name} lessons={lessons} currentId={post.id} />
       )}
     </header>
+    {post.data.sourceCode && <SourceCode url={post.data.sourceCode} />}
     {post.data.disclaimer && (
       <aside class="post-disclaimer article-banner" aria-labelledby="post-disclaimer-label">
-        <p id="post-disclaimer-label" class="article-banner-label">Disclaimer</p>
+        <p id="post-disclaimer-label" class="article-banner-label"><BannerIcon kind="disclaimer" />Disclaimer</p>
         <p>{post.data.disclaimer}</p>
       </aside>
     )}

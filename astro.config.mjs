@@ -13,6 +13,8 @@ try {
 } catch {}
 
 export default defineConfig({
+  // Keep content/image caches inside each build root, including isolated fixtures.
+  cacheDir: './.astro/cache/',
   integrations: [react(), mdx()],
   image: {
     layout: 'constrained',

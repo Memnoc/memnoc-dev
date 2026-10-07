@@ -838,6 +838,14 @@ a.post-tag:hover {
   text-transform: uppercase;
 }
 
+.banner-icon {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-inline-end: 0.4rem;
+  vertical-align: -0.2em;
+}
+
 .article-exercise {
   --banner-accent: var(--rp-foam);
   --banner-label: var(--rp-foam-text);

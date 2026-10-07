@@ -3,6 +3,7 @@ title: "Let's run our first C program"
 date: 2026-10-06
 description: "Lesson 1 of the C course: a little history, Hello World, compilation, assembly, headers, and function prototypes."
 tldr: "Let's learn the C programming language without AI doing all the work for us."
+sourceCode: "https://github.com/Memnoc/C_course/tree/main/lesson_1"
 disclaimer: "This post was not generated using an LLM."
 tags: [learning, c_language, no_ai]
 course:

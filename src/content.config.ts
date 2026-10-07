@@ -9,6 +9,18 @@ const blog = defineCollection({
     description: z.string(),
     tldr: z.string().trim().optional(),
     disclaimer: z.string().trim().optional(),
+    sourceCode: z.string().trim().url().refine(value => {
+      try {
+        const url = new URL(value);
+        return url.protocol === 'https:' && url.hostname === 'github.com'
+          && !url.username && !url.password && !url.port
+          && /^\/[A-Za-z0-9-]+\/[A-Za-z0-9_.-]+(?:\/|$)/.test(url.pathname);
+      } catch {
+        return false;
+      }
+    },
+      'Use an HTTPS github.com/owner/repository URL, optionally pointing to a folder or file.',
+    ).optional(),
     course: z.object({
       name: z.string().trim().min(1),
       lesson: z.number().int().nonnegative(),

@@ -1,3 +1,5 @@
+import { bannerIconPaths } from './banner-icons.mjs';
+
 function element(tagName, properties, children) {
   return { type: 'element', tagName, properties, children };
 }
@@ -31,6 +33,11 @@ export default function articleBanners() {
       };
       node.children = [
         element(kind === 'solution' ? 'summary' : 'p', { className: ['article-banner-label'] }, [
+          element('svg', {
+            className: ['banner-icon'], width: 16, height: 16, viewBox: '0 0 24 24',
+            fill: 'none', stroke: 'currentColor', strokeWidth: 1.75,
+            strokeLinecap: 'round', strokeLinejoin: 'round', ariaHidden: 'true', focusable: 'false',
+          }, [element('path', { d: bannerIconPaths[kind] }, [])]),
           { type: 'text', value: name },
         ]),
         element('div', { className: ['article-banner-body'] }, body),
