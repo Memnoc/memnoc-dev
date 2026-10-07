@@ -5,6 +5,7 @@ import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
 import { unified } from '@astrojs/markdown-remark';
 import articleImages from './src/lib/rehype-article-images.mjs';
+import articleBanners from './src/lib/rehype-article-banners.mjs';
 
 let gitHash = 'unknown';
 try {
@@ -18,7 +19,7 @@ export default defineConfig({
     breakpoints: [400, 800, 1200, 1600],
     responsiveStyles: true,
   },
-  markdown: { processor: unified({ rehypePlugins: [articleImages] }) },
+  markdown: { processor: unified({ rehypePlugins: [articleBanners, articleImages] }) },
   vite: {
     define: {
       __GIT_HASH__: JSON.stringify(gitHash),

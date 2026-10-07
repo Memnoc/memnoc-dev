@@ -815,6 +815,79 @@ a.post-tag:hover {
   color: var(--rp-foam-text);
 }
 
+/* Shared article banners: header, disclaimer, assignments, and answers. */
+.article-banner {
+  padding: 1rem 1.25rem;
+  background: color-mix(in srgb, var(--banner-accent) 8%, var(--rp-surface));
+  border: 1px solid color-mix(in srgb, var(--banner-accent) 35%, var(--rp-hl-med));
+  border-inline-start: 4px solid var(--banner-accent);
+  border-radius: 6px;
+  color: var(--rp-text);
+  font-size: 0.9rem;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
+.article-banner-label {
+  margin-bottom: 0.3rem;
+  color: var(--banner-label);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.article-exercise {
+  --banner-accent: var(--rp-foam);
+  --banner-label: var(--rp-foam-text);
+  margin: 1.25rem 0;
+}
+
+.article-solution {
+  --banner-accent: var(--rp-rose);
+  /* Body text gives the pale rose accent a readable label in Dawn. */
+  --banner-label: var(--rp-text);
+  margin: 1.25rem 0;
+}
+
+.article-solution > summary {
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+.article-solution > summary::marker {
+  color: var(--banner-label);
+}
+
+.article-solution > summary:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.article-solution > summary:focus-visible {
+  outline: 3px solid var(--rp-iris);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.article-solution[open] > summary {
+  margin-bottom: 0.75rem;
+}
+
+.article-banner-body > :first-child {
+  margin-top: 0;
+}
+
+.article-banner-body > :last-child {
+  margin-bottom: 0;
+}
+
+.article-banner-body pre {
+  max-width: 100%;
+  overflow-wrap: normal;
+}
+
 /* ——— About page ——— */
 .about-content {
   font-size: 0.975rem;

@@ -19,7 +19,7 @@ for (const signal of ['SIGTERM', 'SIGINT']) {
 function run(args) {
   if (stopping) return Promise.resolve();
   return new Promise((resolve, reject) => {
-    child = spawn(process.execPath, [astro, ...args, '--root', root], { stdio: 'inherit' });
+    child = spawn(process.execPath, [astro, ...args, '--root', root], { cwd: root, stdio: 'inherit' });
     child.on('error', reject);
     child.on('exit', (code, signal) => {
       if (code === 0 || signal === 'SIGTERM' || signal === 'SIGINT') resolve();
@@ -33,6 +33,7 @@ try {
     await cp(path, join(root, path), { recursive: true });
   }
   await symlink(resolve('node_modules'), join(root, 'node_modules'), 'dir');
+  await cp('tests/article-headers/fixtures/exercises.md', join(root, 'src/content/blog/exercises.md'));
   await writeFile(join(root, 'src/content/blog/without-summary.md'), `---
 title: "An article without a summary"
 date: 2026-09-29

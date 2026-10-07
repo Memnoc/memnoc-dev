@@ -57,12 +57,22 @@ for (const theme of ['dawn', 'moon', 'rose-pine']) {
   for (const width of [320, 1280]) {
     test(`${theme} article headers are distinct, accessible, and fit at ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 900 });
-      for (const slug of ['aoc-16_0', 'without-summary']) {
+      for (const slug of ['aoc-16_0', 'without-summary', 'exercises']) {
         await page.goto(`/writing/${slug}/`);
         await page.getByRole('combobox', { name: 'Theme', exact: true }).selectOption(theme);
         await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
 
         const header = page.getByRole('article').locator('header');
+        if (slug === 'exercises') {
+          for (const summary of await page.locator('summary').all()) await summary.click();
+          await expect(page.getByText('One possible answer:', { exact: true })).toBeVisible();
+          await expect(page.getByText('Replace the string with your name.', { exact: true })).toBeVisible();
+          const code = page.locator('pre').filter({ hasText: 'aaaaaaaaaaaa' });
+          const sizes = await code.evaluate(element => ({
+            client: element.clientWidth, scroll: element.scrollWidth,
+          }));
+          expect(sizes.scroll).toBeGreaterThan(sizes.client);
+        }
         const background = await header.evaluate(element => getComputedStyle(element).backgroundColor);
         expect(background).not.toBe('rgba(0, 0, 0, 0)');
         expect(background).not.toBe(await page.locator('html').evaluate(element => getComputedStyle(element).backgroundColor));
@@ -79,6 +89,8 @@ for (const theme of ['dawn', 'moon', 'rose-pine']) {
           expect(box!.x + box!.width).toBeLessThanOrEqual(width);
         }
         const tag = header.getByRole('link').first();
+        // Switch back to keyboard navigation after opening answers by pointer.
+        await page.keyboard.press('Tab');
         await tag.focus();
         await expect(tag).toBeFocused();
         await expect(tag).not.toHaveCSS('outline-style', 'none');

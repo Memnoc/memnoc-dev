@@ -145,6 +145,58 @@ readable in Dawn as well as the dark themes.
 Image processing uses [Astro's native image support](https://docs.astro.build/en/guides/images/)
 and [Sharp's output encoders](https://sharp.pixelplumbing.com/api-output/).
 
+## Article banners: exercises and solutions
+
+Article headers, disclaimers, exercises, and solutions share compact rounded
+banners with a left accent border. Colors follow the selected Rosé Pine theme:
+iris for the header, gold for disclaimers, foam for exercises, and rose for
+solutions. The optional `tldr` frontmatter stays inside the header without a
+second panel.
+
+In an ordinary `.md` post, use a quoted marker line followed by a quoted blank
+line. An optional **plain-text** title goes on the marker line. Prefix every
+line of the banner with `>`, including blank lines, list items, and code fences:
+
+````md
+> [!EXERCISE] 1 — Print a greeting
+>
+> Write a program that prints **Hello, World!**.
+>
+> 1. Compile it.
+> 2. Run it in your terminal.
+
+> [!SOLUTION] 1 — Print a greeting
+>
+> One possible answer:
+>
+> ```c
+> #include <stdio.h>
+>
+> int main(void) {
+>     puts("Hello, World!");
+>     return 0;
+> }
+> ```
+````
+
+Exercises are always visible. Each solution starts collapsed; click its label
+or focus it with Tab and press Enter or Space to reveal or hide it. This works
+without JavaScript. Keep the exercise number in the title to associate each
+answer with its assignment; answers can appear anywhere in the article.
+
+Omit the title for a simple “Exercise” or “Solution” label. Body content supports
+normal Markdown, including links, images, paragraphs, lists, and fenced code.
+Leave an **unquoted blank line** between separate banners, as above. Ordinary
+blockquotes and unsupported markers such as `[!NOTE]` remain ordinary quotes.
+
+To check banners:
+
+```sh
+pnpm exec playwright test --config tests/article-headers/playwright.config.ts
+```
+
+These isolated browser fixtures never enter the deployable site.
+
 ## Saved project metadata
 
 CodeAtlas and Drudwyn read `src/data/projects.json` at build time. There are no
