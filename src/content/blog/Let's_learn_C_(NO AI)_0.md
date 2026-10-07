@@ -13,9 +13,9 @@ image: "../../assets/blog/learning-c/programming-in-c-banner.png"
 draft: false
 ---
 
-## Let's learn the C language!
-
 ![Programming in C course banner: syntax, patterns, best practices and manual code writing, no AI.](../../assets/blog/learning-c/programming-in-c-banner.png)
+
+## Let's learn the C language!
 
 I am so excited about this! I love C, it's a great language that tends to expose so many of our weaknesses as programmers.
 C does very little for you, so the lift is all yours. This is at time the best and worst feature of the language.

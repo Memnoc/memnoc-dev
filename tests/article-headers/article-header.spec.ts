@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
-test('reader can scan the author-written summary alongside article metadata', async ({ page }) => {
+test('reader sees the author-written summary directly below the title before article metadata', async ({ page }) => {
   await page.goto('/writing/aoc-16_0/');
 
   const article = page.getByRole('article');
@@ -14,6 +14,11 @@ test('reader can scan the author-written summary alongside article metadata', as
   const summary = header.getByRole('region', { name: 'TL;DR', exact: true });
   await expect(summary).toBeVisible();
   await expect(summary).toContainText("Let's get our mojo back by programming an Advent of Code challenge in Typescript without any LLM");
+  const titleBox = await header.getByRole('heading', { level: 1 }).boundingBox();
+  const summaryBox = await summary.boundingBox();
+  const dateBox = await header.getByText('29 Sept 2026', { exact: true }).boundingBox();
+  expect(summaryBox!.y).toBeGreaterThanOrEqual(titleBox!.y + titleBox!.height);
+  expect(summaryBox!.y + summaryBox!.height).toBeLessThanOrEqual(dateBox!.y);
   await expect(article.getByRole('heading', { name: 'Local set up', exact: true })).toBeVisible();
 });
 
@@ -39,6 +44,9 @@ test('reader sees an optional disclaimer and can follow an article reference by 
   await expect(note).toBeVisible();
   await expect(note).toContainText('This post was not generated using an LLM.');
   await expect(note).not.toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
+  const bodyBox = await page.locator('.post-body').boundingBox();
+  const noteBox = await note.boundingBox();
+  expect(noteBox!.y).toBeGreaterThanOrEqual(bodyBox!.y + bodyBox!.height);
 
   const reference = page.getByRole('link', { name: 'An external reference', exact: true });
   await expect(reference).toHaveCSS('text-decoration-line', 'underline');
@@ -55,7 +63,7 @@ test('reader sees an optional disclaimer and can follow an article reference by 
 
 for (const theme of ['dawn', 'moon', 'rose-pine']) {
   for (const width of [320, 1280]) {
-    test(`${theme} article headers are distinct, accessible, and fit at ${width}px`, async ({ page }) => {
+    test(`${theme} plain article headers are accessible and fit at ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 900 });
       for (const slug of ['aoc-16_0', 'without-summary', 'exercises', 'lets_learn_c_no-ai_0', 'lets_learn_c_no-ai_1']) {
         await page.goto(`/writing/${slug}/`);
@@ -74,8 +82,7 @@ for (const theme of ['dawn', 'moon', 'rose-pine']) {
           expect(sizes.scroll).toBeGreaterThan(sizes.client);
         }
         const background = await header.evaluate(element => getComputedStyle(element).backgroundColor);
-        expect(background).not.toBe('rgba(0, 0, 0, 0)');
-        expect(background).not.toBe(await page.locator('html').evaluate(element => getComputedStyle(element).backgroundColor));
+        expect(background).toBe('rgba(0, 0, 0, 0)');
         const dimensions = await page.evaluate(() => ({
           client: document.documentElement.clientWidth,
           scroll: document.documentElement.scrollWidth,

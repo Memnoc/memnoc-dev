@@ -780,23 +780,40 @@ a.post-tag:hover {
   border-radius: 4px;
 }
 
-.post-body h2 {
-  font-size: 1.05rem;
+.post-body :is(h1, h2, h3, h4, h5, h6) {
   font-weight: 600;
   text-transform: none;
   letter-spacing: 0;
-  color: var(--rp-text);
-  margin-top: 2rem;
+  color: var(--rp-iris-text);
+  border-inline-start: 3px solid var(--rp-iris);
+  background: linear-gradient(to right, color-mix(in srgb, var(--rp-iris) 8%, transparent), transparent);
+  padding: 0.35rem 0.75rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.post-body :is(h1, h2) {
+  margin-top: 2.25rem;
   margin-bottom: 0.75rem;
+}
+
+.post-body h1 {
+  font-size: 1.25rem;
+}
+
+.post-body h2 {
+  font-size: 1.1rem;
 }
 
 .post-body h3 {
   font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--rp-text);
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
 }
+
+.post-body h4 { font-size: 0.9rem; }
+.post-body h5 { font-size: 0.875rem; }
+.post-body h6 { font-size: 0.85rem; }
 
 .post-body blockquote {
   border-left: 3px solid var(--rp-hl-high);
@@ -815,7 +832,7 @@ a.post-tag:hover {
   color: var(--rp-foam-text);
 }
 
-/* Shared article banners: header, disclaimer, assignments, and answers. */
+/* Shared article banners: source code, disclaimer, assignments, and answers. */
 .article-banner {
   padding: 1rem 1.25rem;
   background: color-mix(in srgb, var(--banner-accent) 8%, var(--rp-surface));

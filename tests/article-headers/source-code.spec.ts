@@ -11,9 +11,14 @@ test('readers can reach each C lesson source near the top using the keyboard', a
     const link = banner.getByRole('link', { name: 'View source on GitHub', exact: true });
     await expect(link).toHaveAttribute('href', url);
     const header = await page.locator('.post-header').boundingBox();
+    const navigation = page.getByRole('navigation', { name: 'C course lessons', exact: true });
+    const navigationBox = await navigation.boundingBox();
+    const articleBox = await page.getByRole('article').boundingBox();
     const source = await banner.boundingBox();
     const disclaimer = await page.getByRole('complementary', { name: 'Disclaimer', exact: true }).boundingBox();
-    expect(source!.y).toBeGreaterThanOrEqual(header!.y + header!.height);
+    expect(navigationBox!.y).toBe(articleBox!.y);
+    expect(source!.y).toBeGreaterThanOrEqual(navigationBox!.y + navigationBox!.height);
+    expect(source!.y + source!.height).toBeLessThanOrEqual(header!.y);
     expect(source!.y + source!.height).toBeLessThanOrEqual(disclaimer!.y);
     for (let step = 0; step < 20 && !await link.evaluate(element => element === document.activeElement); step++) {
       await page.keyboard.press('Tab');

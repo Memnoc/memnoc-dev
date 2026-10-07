@@ -30,45 +30,45 @@ function formatDate(d: Date) {
 
 <Base title={`${post.data.title} - Matteo Stara`} description={post.data.description}>
   <article class="post">
-    <header class="post-header article-banner">
+    {post.data.course && (
+      <CourseNavigation name={post.data.course.name} lessons={lessons} currentId={post.id} />
+    )}
+    {post.data.sourceCode && <SourceCode url={post.data.sourceCode} />}
+    <header class="post-header">
       <CourseLabel course={post.data.course} />
       <h1 class="post-title">{post.data.title}</h1>
-      <p class="post-meta">{formatDate(post.data.date)}</p>
-      {post.data.tags.length > 0 && (
-        <div class="post-tags">
-          {post.data.tags.map(t => (
-            <a href={`/writing/tag/${t}`} class="tag post-tag">#{t}</a>
-          ))}
-        </div>
-      )}
       {post.data.tldr && (
-        <section class="post-summary" aria-labelledby="post-summary-title">
-          <h2 id="post-summary-title">TL;DR</h2>
+        <section class="post-summary" aria-label="TL;DR">
           <p>{post.data.tldr}</p>
         </section>
       )}
-      {post.data.course && (
-        <CourseNavigation name={post.data.course.name} lessons={lessons} currentId={post.id} />
-      )}
+      <div class="post-details">
+        <p class="post-meta">{formatDate(post.data.date)}</p>
+        {post.data.tags.length > 0 && (
+          <div class="post-tags">
+            {post.data.tags.map(t => (
+              <a href={`/writing/tag/${t}`} class="tag post-tag">#{t}</a>
+            ))}
+          </div>
+        )}
+      </div>
     </header>
-    {post.data.sourceCode && <SourceCode url={post.data.sourceCode} />}
+    <div class="post-body">
+      <Content />
+    </div>
     {post.data.disclaimer && (
       <aside class="post-disclaimer article-banner" aria-labelledby="post-disclaimer-label">
         <p id="post-disclaimer-label" class="article-banner-label"><BannerIcon kind="disclaimer" />Disclaimer</p>
         <p>{post.data.disclaimer}</p>
       </aside>
     )}
-    <div class="post-body">
-      <Content />
-    </div>
   </article>
 </Base>
 
 <style>
   .post-header {
-    --banner-accent: var(--rp-iris);
-    --banner-label: var(--rp-iris-text);
     margin-bottom: 1.5rem;
+    overflow-wrap: anywhere;
   }
 
   .post-title {
@@ -80,23 +80,31 @@ function formatDate(d: Date) {
   }
 
   .post-summary {
-    margin: 0.75rem 0 0;
-  }
-
-  .post-summary h2 {
-    color: var(--rp-iris-text);
-    font-size: 0.75rem;
-    margin-bottom: 0.3rem;
+    margin: 0.5rem 0 0.75rem;
+    font-size: 0.975rem;
+    line-height: 1.65;
   }
 
   .post-summary p {
     color: var(--rp-text);
+    margin: 0;
+  }
+
+  .post-details {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+  }
+
+  .post-tags {
+    margin-top: 0;
   }
 
   .post-disclaimer {
     --banner-accent: var(--rp-gold);
     --banner-label: var(--rp-gold-text);
-    margin: 0 0 2rem;
+    margin: 2rem 0 0;
   }
 
   .post-body :global(a) {
