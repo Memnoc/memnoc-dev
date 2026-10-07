@@ -7,7 +7,7 @@ disclaimer: "These examples are browser test fixtures."
 tags: [learning]
 ---
 
-> [!EXERCISE] Exercise 1 — Print a greeting
+> [!EXERCISE] Exercise 1 - Print a greeting
 >
 > Write a program that prints **Hello, World!**.
 >
@@ -16,7 +16,7 @@ tags: [learning]
 >
 > Consult the [C reference](https://example.com/c).
 
-> [!SOLUTION] Exercise 1 — Print a greeting
+> [!SOLUTION] Exercise 1 - Print a greeting
 >
 > One possible answer:
 >

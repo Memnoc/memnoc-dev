@@ -1,10 +1,10 @@
-# 01 — Compact sources and numbered course navigation
+# 01 - Compact sources and numbered course navigation
 
 **Spec:** docs/specs/2026-10-07-sources-course-order.md
 
 **What to build:** Compact visible sources, course labels in articles/lists, and numerically ordered navigation between published lessons of the same course, with documented authoring.
 
-**Blocked by:** None — can start immediately.
+**Blocked by:** None - can start immediately.
 
 **Status:** done
 

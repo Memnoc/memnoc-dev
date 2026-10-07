@@ -4,7 +4,7 @@ Article bibliographies take up too much space, and readers cannot easily tell wh
 
 ## Solution
 
-Keep sources visible in a compact Rosé Pine section. Show explicit course and lesson labels, starting with 0 — Intro and 1 — Lesson 1 for the C course, and a small navigation row that identifies the current lesson. The author confirmed this design on 2026-10-07.
+Keep sources visible in a compact Rosé Pine section. Show explicit course and lesson labels, starting with 0 - Intro and 1 - Lesson 1 for the C course, and a small navigation row that identifies the current lesson. The author confirmed this design on 2026-10-07.
 
 ## User Stories
 
@@ -24,7 +24,7 @@ Keep sources visible in a compact Rosé Pine section. Show explicit course and l
 - Assign the existing two C posts to C course at numbers zero and one. Keep titles and URLs intact.
 - Use a shared course label in article headers and both listing views. Render an ordered course navigation row in article headers, with the current entry marked using aria-current. Sort numerically, include only published entries from the same course, and preserve Writing's existing date ordering.
 - Document both source syntax and course frontmatter in the README.
-- Add a four-step Hello World exercise before Lesson 1's recap, using the existing exercise banner.
+- Add a five-step Hello World exercise before Lesson 1's recap, using the existing exercise banner.
 
 ## Testing Decisions
 
@@ -46,13 +46,13 @@ Verified on 2026-10-07 using isolated production fixtures and the actual local d
 
 | Story | Verdict | Evidence |
 | --- | --- | --- |
-| 1 — Compact visible references | pass | Both sections render as visible sources regions with 13px text versus 15.6px body text. Exact comparison confirms reference text and URLs were preserved. |
-| 2 — Source authoring | pass | Actual posts build from the documented SOURCES marker with links, paragraphs, and lists. |
-| 3 — Course labels | pass | Browser checks find Intro and Lesson 1 labels in headers, Writing, and the C tag list. |
-| 4 — Course navigation | pass | Keyboard activation, current-page marking, numeric ordering of lessons 2/10, and isolation from unrelated courses verified. |
-| 5 — Metadata and drafts | pass | Draft fixture routes return 404 and are omitted from navigation; ordinary posts have no course navigation. Disposable builds reject negative/fractional numbers, blank course names, and duplicate published numbers. |
-| 6 — Accessible layouts | pass | Axe and overflow checks pass in all three themes at 320px and 1280px for both C posts. Local screenshots of the header, sources, and mobile exercise inspected. |
-| 7 — Lesson 1 exercise | pass | Four-step Hello World exercise renders before the recap; browser checks verify the visible banner and four tasks. |
+| 1 - Compact visible references | pass | Both sections render as visible sources regions with 13px text versus 15.6px body text. Exact comparison confirms reference text and URLs were preserved. |
+| 2 - Source authoring | pass | Actual posts build from the documented SOURCES marker with links, paragraphs, and lists. |
+| 3 - Course labels | pass | Browser checks find Intro and Lesson 1 labels in headers, Writing, and the C tag list. |
+| 4 - Course navigation | pass | Keyboard activation, current-page marking, numeric ordering of lessons 2/10, and isolation from unrelated courses verified. |
+| 5 - Metadata and drafts | pass | Draft fixture routes return 404 and are omitted from navigation; ordinary posts have no course navigation. Disposable builds reject negative/fractional numbers, blank course names, and duplicate published numbers. |
+| 6 - Accessible layouts | pass | Axe and overflow checks pass in all three themes at 320px and 1280px for both C posts. Local screenshots of the header, sources, and mobile exercise inspected. |
+| 7 - Lesson 1 exercise | pass | Five-step Hello World exercise renders before the recap; browser checks verify the visible banner and five tasks, including the author-added compiler experiment with an unrecognized escape sequence. |
 
 Typecheck and production build passed. All 98 tests passed: 43 production browser, 15 article browser, 1 project fallback browser, and 39 offline tests. Image audit has zero errors and the five existing advisory warnings. The requested development server was started on port 4321 for author review.
 

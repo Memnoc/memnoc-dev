@@ -1,6 +1,6 @@
 # memnoc.dev
 
-Personal site and technical writing. Built with Astro 6 as a fully static site — no runtime server and no JS framework overhead on the critical path.
+Personal site and technical writing. Built with Astro 6 as a fully static site - no runtime server and no JS framework overhead on the critical path.
 
 ## Architecture
 
@@ -8,7 +8,7 @@ Astro's island architecture: pages render to static HTML at build time. The
 standalone Lox expression parser on the home page hydrates client-side as an
 isolated React 19 island. Everything else ships zero framework JavaScript.
 
-Content is managed through Astro's typed content layer — blog posts are Markdown files with Zod-validated frontmatter, compiled to static routes at build time. No CMS, no database.
+Content is managed through Astro's typed content layer - blog posts are Markdown files with Zod-validated frontmatter, compiled to static routes at build time. No CMS, no database.
 
 The navigation's Theme dropdown offers Rosé Pine, Moon, and Dawn across the
 site and blog. Choices persist across pages and reloads; without a saved
@@ -130,7 +130,7 @@ Measured migration on 2026-10-01 (decimal KB; article sizes show an 800px varian
 | --- | ---: | ---: | ---: | ---: |
 | Brain photo | 1,064 KB | 63 KB | 8.5 KB | 0.5 / 1.6 KB |
 | C photo | 609 KB | 59 KB | 10.8 KB | 1.4 / 3.0 KB |
-| Study diagram | 702 KB | 639 KB | 111.7 KB | — |
+| Study diagram | 702 KB | 639 KB | 111.7 KB | - |
 
 The diagram deliberately exceeds the source budget to retain detail; its largest
 delivered variant is 271.7 KB, within the article budget. The three migration
@@ -158,14 +158,14 @@ line. An optional **plain-text** title goes on the marker line. Prefix every
 line of the banner with `>`, including blank lines, list items, and code fences:
 
 ````md
-> [!EXERCISE] 1 — Print a greeting
+> [!EXERCISE] 1 - Print a greeting
 >
 > Write a program that prints **Hello, World!**.
 >
 > 1. Compile it.
 > 2. Run it in your terminal.
 
-> [!SOLUTION] 1 — Print a greeting
+> [!SOLUTION] 1 - Print a greeting
 >
 > One possible answer:
 >
@@ -299,7 +299,7 @@ and [create-pull-request](https://github.com/peter-evans/create-pull-request).
 ```
 src/
   components/       # React island (standalone Lox expression parser)
-  content/blog/     # Markdown posts — typed via Zod schema
+  content/blog/     # Markdown posts - typed via Zod schema
   assets/blog/      # Prepared image sources; generated variants stay in dist/
   content.config.ts # Content collection schema
   layouts/Base.astro

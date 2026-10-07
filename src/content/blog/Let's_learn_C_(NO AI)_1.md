@@ -162,7 +162,7 @@ To sum up, the compiler needs to know everything about your code before it attem
 The duality of C is a fundamental part of the language. Generally speaking, you will find source files containing implementations and headers commonly sharing declarations, types, and macros.
 More on this topic: [GCC's explanation of headers](https://gcc.gnu.org/onlinedocs/cpp/Header-Files.html).
 
-> [!EXERCISE] 1 — Make Hello World your own
+> [!EXERCISE] 1 - Make Hello World your own
 >
 > Put this lesson into practice before moving on:
 >
@@ -170,8 +170,9 @@ More on this topic: [GCC's explanation of headers](https://gcc.gnu.org/onlinedoc
 > 2. Compile it with `gcc hello_world.c -o hello_world`, then run `./hello_world` and check the output.
 > 3. Change the greeting to include your name. Compile and run the program again to see the change.
 > 4. Run `gcc -S hello_world.c` and open `hello_world.s`. Find your greeting in the assembly output and explain what the `-S` flag changed about the compiler's output.
+> 5. Add a `\c` character to `printf` and try to compile.
 >
-> *Exercise prompt drafted with Codex for author review.*
+> _Exercise prompt drafted with Codex for author review._
 
 ### What did we learn?
 

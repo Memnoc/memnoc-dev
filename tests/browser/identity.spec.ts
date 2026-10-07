@@ -40,8 +40,12 @@ test('visitor sees Applied AI framed as study and future writing', async ({ page
 
     const pageContent = page.locator('main');
     await expect(pageContent).toContainText(
-      'I also study applied AI systems and write about what I learn.',
+      'I also study applied AI systems',
     );
+    await expect(pageContent).toContainText('write about what I learn');
+    if (path === '/') {
+      await expect(pageContent).toContainText('Computational Linguistics and Natural Language Processing');
+    }
     await expect(pageContent).not.toContainText(/AI researcher|AI research role/i);
   }
 });

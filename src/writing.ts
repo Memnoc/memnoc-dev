@@ -17,5 +17,5 @@ export async function getPublishedWriting() {
 }
 
 export function lessonLabel(lesson: number) {
-  return lesson === 0 ? '0 — Intro' : `${lesson} — Lesson ${lesson}`;
+  return lesson === 0 ? '0 - Intro' : `${lesson} - Lesson ${lesson}`;
 }

@@ -20,3 +20,9 @@ when unsure.
 - `.scratch/<spec-slug>/` — tickets; disposable once the feature ships
 
 All are created lazily on first write.
+
+## Writing style
+
+Use a single ASCII hyphen (`-`) for separators in prose and UI labels, for
+example `1 - Lesson 1`. Do not use em dashes, en dashes, or double hyphens as
+punctuation. Preserve required syntax such as CLI flags and Markdown frontmatter.
