@@ -4,7 +4,7 @@ function element(tagName, properties, children) {
   return { type: 'element', tagName, properties, children };
 }
 
-const labels = { exercise: 'Exercise', solution: 'Solution', sources: 'Sources' };
+const labels = { exercise: 'Exercise', solution: 'Solution', sources: 'Sources', bonus: 'Bonus', clarification: 'Clarification' };
 
 // Markdown blockquotes keep code, links, lists, and images in the normal pipeline.
 export default function articleBanners() {
@@ -18,7 +18,7 @@ export default function articleBanners() {
       const marker = first.children[0];
       if (marker.type !== 'text') return;
       // The marker and optional plain-text title occupy their own paragraph.
-      const match = /^\[!(EXERCISE|SOLUTION|SOURCES)\](?:[ \t]+([^\n]+))?[ \t]*$/.exec(marker.value);
+      const match = /^\[!(EXERCISE|SOLUTION|SOURCES|BONUS|CLARIFICATION)\](?:[ \t]+([^\n]+))?[ \t]*$/.exec(marker.value);
       if (!match) return;
 
       const kind = match[1].toLowerCase();

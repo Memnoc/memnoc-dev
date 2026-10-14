@@ -205,7 +205,7 @@ Add a GitHub URL to a post's existing frontmatter:
 sourceCode: "https://github.com/Memnoc/C_course/tree/main/lesson_1"
 ```
 
-This adds a compact source-code banner immediately below the article header,
+This adds a compact source-code banner near the beginning of the article,
 using Rosé Pine's love accent and a code-bracket icon. Repository roots, lesson
 folders, and individual files are supported. Use an HTTPS `github.com` URL with
 an owner and repository; other hosts and URLs containing credentials are rejected.
@@ -214,10 +214,44 @@ builds do not depend on GitHub availability. Choose the intended link explicitly
 for each new lesson; the Intro currently links to the course repository root.
 
 Banner icons supplement their text labels: code brackets for source code, a
-pencil for exercises, a lightbulb for solutions, an open book for sources, and
-an information symbol for disclaimers. The icons follow the theme, require no
+pencil for exercises, a lightbulb for solutions, an open book for sources, a
+compass for optional Bonus material, and an information symbol for disclaimers
+and clarifications.
+The icons follow the theme, require no
 downloads or JavaScript, and are hidden from screen readers to avoid redundant
 announcements. Solutions keep their native expand/collapse arrow.
+
+## Bonus material
+
+Use a Bonus banner for optional experiments or further exploration. It stays
+visible, uses the Rose Pine iris accent, and has a compass icon. Include a blank
+quoted line after the marker; an optional title follows it on the same line.
+
+```md
+> [!BONUS] Check your C implementation
+>
+> Try printing `INT_MAX` from `<limits.h>`.
+>
+> Code blocks, lists, and links work here too.
+```
+
+Lesson 2 includes the complete header-inspection example and its compile/run
+commands in a Bonus banner. End the callout with an unquoted blank line.
+
+## Inline clarifications
+
+Use a Clarification banner to highlight a detail within the article. It stays
+visible, uses the Rose Pine pine accent, and has an information icon. The shape
+matches the other banners; the disclaimer remains a separate note at the bottom.
+
+```md
+> [!CLARIFICATION] Floating-point precision
+>
+> Printing six decimal places does not guarantee six accurate decimal places.
+```
+
+The title is optional. Prefix every content line with `>`, including blank
+lines; end the callout with an unquoted blank line. Rich Markdown works here too.
 
 ## Compact sources
 

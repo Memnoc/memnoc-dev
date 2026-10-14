@@ -21,7 +21,10 @@ export default defineConfig({
     breakpoints: [400, 800, 1200, 1600],
     responsiveStyles: true,
   },
-  markdown: { processor: unified({ rehypePlugins: [articleBanners, articleImages] }) },
+  markdown: {
+    processor: unified({ rehypePlugins: [articleBanners, articleImages] }),
+    shikiConfig: { theme: 'css-variables' },
+  },
   vite: {
     define: {
       __GIT_HASH__: JSON.stringify(gitHash),

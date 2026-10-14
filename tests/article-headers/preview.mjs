@@ -66,11 +66,11 @@ This older article still has its original body.
 
 [An external reference](https://example.com/reference)
 
-![First local image](../../assets/blog/brain-gym/cover.jpg)
+![First local image](../../assets/blog/brain-gym/brain-gym-banner.png)
 
 ![Later local image][photo]
 
-[photo]: ../../assets/blog/brain-gym/cover.jpg
+[photo]: ../../assets/blog/brain-gym/brain-gym-banner.png
 `);
   await run(['build']);
   await run(['preview', '--host', '127.0.0.1', '--port', process.env.PREVIEW_PORT ?? '4321']);

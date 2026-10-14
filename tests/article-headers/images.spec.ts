@@ -8,7 +8,7 @@ test('body images reserve space and load lazily after the first, including refer
   await expect(later).toHaveAttribute('loading', 'lazy');
   for (const image of [first, later]) {
     await expect(image).toHaveAttribute('width', '1600');
-    await expect(image).toHaveAttribute('height', '1067');
+    await expect(image).toHaveAttribute('height', '840');
     await expect(image).toHaveAttribute('srcset', /400w/);
     await image.scrollIntoViewIfNeeded();
     await expect.poll(() => image.evaluate(img => (img as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);

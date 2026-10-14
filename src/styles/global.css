@@ -193,6 +193,20 @@ pre code {
   padding: 0;
 }
 
+.astro-code {
+  --astro-code-foreground: var(--rp-text);
+  --astro-code-background: var(--rp-surface);
+  --astro-code-token-comment: var(--rp-subtle-text);
+  --astro-code-token-constant: color-mix(in srgb, var(--rp-love-text) 80%, var(--rp-text));
+  --astro-code-token-string: var(--rp-foam-text);
+  --astro-code-token-keyword: var(--rp-iris-text);
+  --astro-code-token-parameter: var(--rp-text);
+  --astro-code-token-function: var(--rp-gold-text);
+  --astro-code-token-string-expression: var(--rp-foam-text);
+  --astro-code-token-punctuation: var(--rp-subtle-text);
+  --astro-code-token-link: var(--rp-foam-text);
+}
+
 ul,
 ol {
   padding-left: 1.25rem;
@@ -821,6 +835,37 @@ a.post-tag:hover {
 .post-body h5 { font-size: 0.875rem; }
 .post-body h6 { font-size: 0.85rem; }
 
+.post-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font: inherit;
+  line-height: 1.5;
+}
+
+.post-body th,
+.post-body td {
+  padding: 0.6rem 0.75rem;
+  text-align: start;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--rp-hl-med);
+}
+
+.post-body th:first-child {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.post-body td:first-child code {
+  white-space: nowrap;
+  overflow-wrap: normal;
+}
+
+.post-body tbody tr:last-child td {
+  border-bottom: none;
+}
+
 .post-body strong {
   color: color-mix(in srgb, var(--rp-love-text) 80%, var(--rp-text));
   font-weight: 700;
@@ -843,7 +888,7 @@ a.post-tag:hover {
   color: var(--rp-foam-text);
 }
 
-/* Shared article banners: source code, disclaimer, assignments, and answers. */
+/* Shared article banners: source code, disclaimer, assignments, answers, bonus material, and clarifications. */
 .article-banner {
   padding: 1rem 1.25rem;
   background: color-mix(in srgb, var(--banner-accent) 8%, var(--rp-surface));
@@ -877,6 +922,18 @@ a.post-tag:hover {
 .article-exercise {
   --banner-accent: var(--rp-foam);
   --banner-label: var(--rp-foam-text);
+  margin: 1.25rem 0;
+}
+
+.article-bonus {
+  --banner-accent: var(--rp-iris);
+  --banner-label: var(--rp-iris-text);
+  margin: 1.25rem 0;
+}
+
+.article-clarification {
+  --banner-accent: var(--rp-pine);
+  --banner-label: color-mix(in srgb, var(--rp-pine) 40%, var(--rp-text));
   margin: 1.25rem 0;
 }
 

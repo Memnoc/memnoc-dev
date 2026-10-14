@@ -31,7 +31,7 @@ test('reader can attempt an exercise and independently reveal answers without Ja
     await expect(illustration).toHaveAttribute('src', /\/_astro\/.*\.webp$/);
     await expect(illustration).toHaveAttribute('srcset', /400w/);
     await expect(illustration).toHaveAttribute('width', '1600');
-    await expect(illustration).toHaveAttribute('height', '1067');
+    await expect(illustration).toHaveAttribute('height', '840');
     await first.press('Space');
     await expect(answer).toBeHidden();
     await expect(secondAnswer).toBeVisible();

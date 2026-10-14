@@ -7,6 +7,17 @@ disclaimer: "These examples are browser test fixtures."
 tags: [learning]
 ---
 
+> [!BONUS] Explore your compiler
+>
+> Print **INT_MAX** and compare it with the [integer limits](https://example.com/limits).
+>
+> ```c
+> #include <limits.h>
+> printf("%d\n", INT_MAX);
+> ```
+>
+> This optional exploration stays visible.
+
 > [!EXERCISE] Exercise 1 - Print a greeting
 >
 > Write a program that prints **Hello, World!**.
@@ -44,7 +55,7 @@ tags: [learning]
 >
 > Replace the string with your name.
 >
-> ![An illustration inside the answer](../../assets/blog/brain-gym/cover.jpg)
+> ![An illustration inside the answer](../../assets/blog/brain-gym/brain-gym-banner.png)
 
 > An ordinary quotation stays a quotation.
 

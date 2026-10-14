@@ -1,14 +1,14 @@
 import { expect, test } from '@playwright/test';
 
-test('article photographs use responsive generated assets with stable layout dimensions', async ({ page }) => {
+test('article images use responsive generated assets with stable layout dimensions', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 900 });
   await page.goto('/writing/aoc-16_0/');
-  const photo = page.getByRole('img', { name: 'A model brain surrounded by lightbulb-shaped paper clips on a dark background.', exact: true });
+  const photo = page.getByRole('img', { name: 'Get your brain back to the gym: a barbell and a workout checklist for programming without AI.', exact: true });
   await expect(photo).toHaveAttribute('src', /\/_astro\/.*\.webp/);
   await expect(photo).toHaveAttribute('srcset', /400w/);
   await expect(photo).toHaveAttribute('srcset', /1600w/);
   await expect(photo).toHaveAttribute('width', '1600');
-  await expect(photo).toHaveAttribute('height', /\d+/);
+  await expect(photo).toHaveAttribute('height', '840');
   await expect(photo).toHaveAttribute('loading', 'eager');
   await expect.poll(() => photo.evaluate(img => (img as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
   const mobileSrc = await photo.evaluate(img => (img as HTMLImageElement).currentSrc);

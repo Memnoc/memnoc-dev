@@ -6,7 +6,7 @@ test('reader sees the author-written summary directly below the title before art
 
   const article = page.getByRole('article');
   const header = article.locator('header');
-  await expect(article.getByRole('complementary', { name: 'Disclaimer', exact: true })).toHaveCount(0);
+  await expect(article.getByRole('complementary', { name: 'Disclaimer', exact: true })).toBeVisible();
   await expect(article.getByRole('heading', { level: 1 })).toHaveCount(1);
   await expect(header.getByRole('heading', { level: 1, name: 'Get your brain to the gym!' })).toBeVisible();
   await expect(header.getByText('29 Sept 2026', { exact: true })).toBeVisible();
@@ -20,6 +20,16 @@ test('reader sees the author-written summary directly below the title before art
   expect(summaryBox!.y).toBeGreaterThanOrEqual(titleBox!.y + titleBox!.height);
   expect(summaryBox!.y + summaryBox!.height).toBeLessThanOrEqual(dateBox!.y);
   await expect(article.getByRole('heading', { name: 'Local set up', exact: true })).toBeVisible();
+  await expect(article.getByRole('region', { name: 'Bonus: When you get stuck', exact: true })).toBeVisible();
+  const sources = article.getByRole('region', { name: 'Sources', exact: true });
+  await expect(sources).toBeVisible();
+  await expect(sources.getByRole('link', { name: 'TypeScript configuration reference', exact: true }))
+    .toHaveAttribute('href', 'https://www.typescriptlang.org/tsconfig/');
+  const bodyBox = await article.locator('.post-body').boundingBox();
+  const disclaimer = article.getByRole('complementary', { name: 'Disclaimer', exact: true });
+  await expect(disclaimer).toContainText('expect grammar errors, incoherent thoughts');
+  const disclaimerBox = await disclaimer.boundingBox();
+  expect(disclaimerBox!.y).toBeGreaterThanOrEqual(bodyBox!.y + bodyBox!.height);
 });
 
 test('an older post without summary metadata keeps its body and tags without an empty panel', async ({ page }) => {
@@ -65,7 +75,7 @@ for (const theme of ['dawn', 'moon', 'rose-pine']) {
   for (const width of [320, 1280]) {
     test(`${theme} plain article headers are accessible and fit at ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 900 });
-      for (const slug of ['aoc-16_0', 'without-summary', 'exercises', 'lets_learn_c_no-ai_0', 'lets_learn_c_no-ai_1']) {
+      for (const slug of ['aoc-16_0', 'without-summary', 'exercises', 'lets_learn_c_no-ai_0', 'lets_learn_c_no-ai_1', 'lets_learn_c_no_ai_2']) {
         await page.goto(`/writing/${slug}/`);
         await page.getByRole('combobox', { name: 'Theme', exact: true }).selectOption(theme);
         await expect(page.locator('html')).toHaveAttribute('data-theme', theme);

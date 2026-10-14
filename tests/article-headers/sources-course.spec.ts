@@ -24,11 +24,12 @@ test('reader can identify C lessons in listings and navigate from Intro to Lesso
     await page.goto(path);
     await expect(page.getByText('C course · 0 - Intro', { exact: true })).toBeVisible();
     await expect(page.getByText('C course · 1 - Lesson 1', { exact: true })).toBeVisible();
+    await expect(page.getByText('C course · 2 - Lesson 2', { exact: true })).toBeVisible();
   }
   await page.goto('/writing/lets_learn_c_no-ai_0/');
   await expect(page.getByText('C course · 0 - Intro', { exact: true })).toBeVisible();
   const nav = page.getByRole('navigation', { name: 'C course lessons', exact: true });
-  await expect(nav.getByRole('link')).toHaveText(['0 - Intro', '1 - Lesson 1']);
+  await expect(nav.getByRole('link')).toHaveText(['0 - Intro', '1 - Lesson 1', '2 - Lesson 2']);
   await expect(nav.getByRole('link', { name: '0 - Intro', exact: true })).toHaveAttribute('aria-current', 'page');
   const next = nav.getByRole('link', { name: '1 - Lesson 1', exact: true });
   await page.keyboard.press('Tab');

@@ -4,7 +4,7 @@ date: 2026-10-06
 description: "Lesson 1 of the C course: a little history, Hello World, compilation, assembly, headers, and function prototypes."
 tldr: "Let's learn the C programming language without AI doing all the work for us."
 sourceCode: "https://github.com/Memnoc/C_course/tree/main/lesson_1"
-disclaimer: "This post was not generated using an LLM."
+disclaimer: "This post was not generated using an LLM. LLMs are used to check grammar, source code and as a help to provide sources and links."
 tags: [learning, c_language, no_ai]
 course:
   name: C course
@@ -172,8 +172,6 @@ More on this topic: [GCC's explanation of headers](https://gcc.gnu.org/onlinedoc
 > 3. Change the greeting to include your name. Compile and run the program again to see the change.
 > 4. Run `gcc -S hello_world.c` and open `hello_world.s`. Find your greeting in the assembly output and explain what the `-S` flag changed about the compiler's output.
 > 5. Add a `\c` character to `printf` and try to compile.
->
-> _Exercise prompt drafted with Codex for author review._
 
 ### What did we learn?
 
